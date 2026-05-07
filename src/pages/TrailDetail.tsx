@@ -1,8 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Share2, Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
-import { initMiniMap } from '../utils/arcgis'
 import KidBadges from '../components/KidBadges/KidBadges'
 import NavBar from '../components/NavBar/NavBar'
 
@@ -21,9 +20,6 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
 export default function TrailDetail() {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const miniMapRef = useRef<HTMLDivElement>(null)
-  const viewRef = useRef<__esri.MapView | null>(null)
-
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const requestLocationFocus = useAppStore((s) => s.requestLocationFocus)
@@ -33,16 +29,6 @@ export default function TrailDetail() {
   useEffect(() => {
     if (trail) setSelectedTrail(trail)
     return () => setSelectedTrail(null)
-  }, [trail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (!miniMapRef.current || viewRef.current || !trail) return
-    const view = initMiniMap(miniMapRef.current, trail)
-    viewRef.current = view
-    return () => {
-      viewRef.current?.destroy()
-      viewRef.current = null
-    }
   }, [trail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!trail) {
@@ -74,8 +60,13 @@ export default function TrailDetail() {
 
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
-        {/* Mini map */}
-        <div ref={miniMapRef} style={{ height: 160 }} className="w-full bg-gray-100 shrink-0" />
+        {/* Photos */}
+        <div className="w-full bg-gradient-to-br from-green-50 to-teal-100 flex items-center justify-center text-gray-400" style={{ height: 160 }}>
+          <div className="text-center">
+            <p className="text-3xl">📷</p>
+            <p className="text-xs mt-1">Photos coming soon</p>
+          </div>
+        </div>
 
         <div className="px-4 pt-4">
           <h2 className="text-[17px] font-bold text-gray-900 leading-snug">{trail.name}</h2>
@@ -130,16 +121,6 @@ export default function TrailDetail() {
             <KidBadges features={trail.kidFeatures} size="md" />
           </section>
 
-          {/* Photos placeholder */}
-          <section className="mb-4">
-            <h3 className="text-sm font-semibold text-gray-700 mb-2">Photos</h3>
-            <div className="rounded-2xl bg-gradient-to-br from-green-50 to-teal-100 h-36 flex items-center justify-center text-gray-400">
-              <div className="text-center">
-                <p className="text-3xl">📷</p>
-                <p className="text-xs mt-1">Photos coming soon</p>
-              </div>
-            </div>
-          </section>
         </div>
       </div>
 
