@@ -124,8 +124,8 @@ export default function TrailDetail() {
         </div>
       </div>
 
-      {/* Sticky CTA */}
-      <div className="shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100">
+      {/* Sticky CTA — desktop only, mobile uses map view buttons */}
+      <div className="hidden md:block shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100">
         <div className="bg-white rounded-2xl shadow-sm p-3 flex flex-col gap-2">
           <button
             onClick={requestLocationFocus}
