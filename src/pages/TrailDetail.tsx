@@ -12,9 +12,9 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 }
 
 const DIFFICULTY_CLASSES: Record<string, string> = {
-  easy: 'bg-easy text-easy-text',
-  moderate: 'bg-moderate text-moderate-text',
-  hard: 'bg-red-100 text-red-800',
+  easy: 'text-easy-text',
+  moderate: 'text-moderate-text',
+  hard: 'text-red-800',
 }
 
 export default function TrailDetail() {
