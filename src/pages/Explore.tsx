@@ -45,7 +45,7 @@ export default function Explore() {
           />
           <input
             type="text"
-            placeholder="Search trails near you…"
+            placeholder="Search trail by name"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="w-full pl-9 pr-4 py-2.5 bg-gray-50 rounded-xl text-sm border border-gray-200 outline-none focus:border-primary transition-colors"
