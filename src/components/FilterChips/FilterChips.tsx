@@ -8,7 +8,7 @@ interface Props {
 const difficultyTags: { id: FilterType; label: string; activeClass: string }[] = [
   { id: 'easy',     label: '🟢 Easy',     activeClass: 'bg-easy text-easy-text'         },
   { id: 'moderate', label: '🟡 Moderate', activeClass: 'bg-moderate text-moderate-text' },
-  { id: 'hard',     label: '🔴 Hard',     activeClass: 'bg-red-100 text-red-800'         },
+  { id: 'hard',     label: '🔴 Hard',     activeClass: 'bg-hard text-hard-text'          },
 ]
 
 const kidTags: { id: FilterType; label: string; activeClass: string }[] = [
@@ -42,7 +42,7 @@ function Tag({
       } ${
         isActive
           ? `${activeClass} border-transparent font-semibold shadow-sm`
-          : 'bg-white border-gray-200 text-gray-500 font-medium hover:border-gray-400 hover:text-gray-700'
+          : 'bg-surface border-gray-200 text-gray-500 font-medium hover:border-gray-400 hover:text-gray-700'
       }`}
     >
       {label}

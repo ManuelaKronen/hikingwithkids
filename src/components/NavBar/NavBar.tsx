@@ -9,7 +9,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className="md:hidden shrink-0 bg-white border-t border-gray-200"
+      className="md:hidden shrink-0 bg-surface border-t border-gray-200"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       <div className="flex">

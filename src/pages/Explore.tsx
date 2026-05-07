@@ -33,7 +33,7 @@ export default function Explore() {
   return (
     <div className="h-full flex flex-col overflow-hidden">
       {/* Sticky header */}
-      <div className="shrink-0 bg-white px-4 pt-4 pb-2 border-b border-gray-100">
+      <div className="shrink-0 bg-surface px-4 pt-4 pb-2 border-b border-gray-100">
 
         <p className="font-bold text-gray-900 text-lg mb-3 md:hidden">Hiking with Kids</p>
 
@@ -49,7 +49,7 @@ export default function Explore() {
             placeholder="Search trail by name"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 bg-gray-50 rounded-xl text-sm border border-gray-200 outline-none focus:border-primary transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 bg-surface-secondary rounded-xl text-sm border border-gray-200 outline-none focus:border-primary transition-colors"
           />
         </div>
 

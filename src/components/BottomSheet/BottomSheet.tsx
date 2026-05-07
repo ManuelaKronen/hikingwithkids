@@ -15,7 +15,7 @@ export default function BottomSheet({ selectedTrail }: Props) {
 
   return (
     <div
-      className="shrink-0 bg-white border-t border-gray-100"
+      className="shrink-0 bg-surface border-t border-gray-100"
       style={{ boxShadow: '0 -4px 20px rgba(0,0,0,0.08)' }}
     >
       <div className="px-4 py-3 flex gap-2">

@@ -14,7 +14,7 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 const DIFFICULTY_CLASSES: Record<string, string> = {
   easy: 'text-easy-text',
   moderate: 'text-moderate-text',
-  hard: 'text-red-800',
+  hard: 'text-hard-text',
 }
 
 export default function TrailDetail() {
@@ -115,7 +115,7 @@ export default function TrailDetail() {
 
       {/* Sticky CTA — desktop only, mobile uses map view buttons */}
       <div className="hidden md:block shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100">
-        <div className="bg-white rounded-2xl shadow-sm p-3 flex flex-col gap-2">
+        <div className="bg-surface rounded-2xl shadow-sm p-3 flex flex-col gap-2">
           <button
             onClick={requestLocationFocus}
             className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-[15px]"

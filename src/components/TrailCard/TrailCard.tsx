@@ -8,9 +8,9 @@ interface Props {
 }
 
 const GRADIENTS: Record<string, string> = {
-  easy: 'from-green-100 to-green-300',
-  moderate: 'from-amber-100 to-amber-300',
-  hard: 'from-red-100 to-red-300',
+  easy: 'from-emerald-200 to-green-600',
+  moderate: 'from-amber-200 to-amber-500',
+  hard: 'from-orange-300 to-red-500',
 }
 
 const DIFFICULTY_LABEL: Record<string, string> = {
@@ -22,7 +22,7 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 const DIFFICULTY_CLASSES: Record<string, string> = {
   easy: 'bg-easy text-easy-text',
   moderate: 'bg-moderate text-moderate-text',
-  hard: 'bg-red-100 text-red-800',
+  hard: 'bg-hard text-hard-text',
 }
 
 export default function TrailCard({ trail, distanceFromUser }: Props) {
@@ -30,7 +30,7 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
 
   return (
     <div
-      className="flex items-center gap-3 bg-white rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
+      className="flex items-center gap-3 bg-surface rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
       onClick={() => navigate(`/trail/${trail.id}`)}
     >
       {/* Thumbnail */}

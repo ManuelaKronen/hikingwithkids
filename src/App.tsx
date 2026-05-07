@@ -33,7 +33,7 @@ function DesktopTopNav() {
   const onDetailPage = useMatch('/trail/:id')
 
   return (
-    <div className="hidden md:flex items-center px-4 py-3 border-b border-gray-200 bg-white shrink-0">
+    <div className="hidden md:flex items-center px-4 py-3 border-b border-gray-200 bg-surface shrink-0">
       <span className="font-bold text-gray-900 flex-1">Hiking with Kids</span>
       {onDetailPage && (
         <button
