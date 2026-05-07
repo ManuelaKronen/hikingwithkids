@@ -141,28 +141,46 @@ export function clearRouteIndicator(view: __esri.MapView) {
 
 export function initMiniMap(container: HTMLDivElement, trail: Trail): __esri.MapView {
   setupEsri()
+  const color = COLORS[trail.difficulty] ?? COLORS.easy
+  const hasRoute = trail.geometry.coordinates.length > 1
+
   const routeLayer = new GraphicsLayer()
+
   const polyline = new Polyline({
     paths: [trail.geometry.coordinates],
     spatialReference: { wkid: 4326 },
   })
-  const lineSymbol = new SimpleLineSymbol({
-    color: [29, 158, 117, 220],
-    width: 3,
-    style: 'dash',
-  })
-  routeLayer.add(new Graphic({ geometry: polyline, symbol: lineSymbol }))
+
+  if (hasRoute) {
+    routeLayer.add(new Graphic({
+      geometry: polyline,
+      symbol: new SimpleLineSymbol({ color, width: 3 }),
+    }))
+  }
+
+  routeLayer.add(new Graphic({
+    geometry: new Point({ longitude: trail.lng, latitude: trail.lat }),
+    symbol: new SimpleMarkerSymbol({
+      color,
+      size: 10,
+      outline: { color: [255, 255, 255, 255], width: 2 },
+    }),
+  }))
 
   const map = new Map({ basemap: 'arcgis/outdoor', layers: [routeLayer] })
-  return new MapView({
+  const view = new MapView({
     container,
     map,
     center: [trail.lng, trail.lat],
     zoom: 14,
     ui: { components: [] },
-    navigation: {
-      mouseWheelZoomEnabled: false,
-      browserTouchPanEnabled: false,
-    },
+    navigation: { mouseWheelZoomEnabled: false, browserTouchPanEnabled: false },
   })
+
+  view.when(() => {
+    const target = hasRoute && polyline.extent ? polyline.extent.expand(1.6) : view.center
+    view.goTo(target, { animate: false }).catch(() => {})
+  })
+
+  return view
 }
