@@ -7,6 +7,7 @@ import {
   updateTrailLayer,
   updateUserLocationOnMap,
   flyToTrail,
+  flyToTrailAndUser,
 } from '../utils/arcgis'
 import BottomSheet from '../components/BottomSheet/BottomSheet'
 import NavBar from '../components/NavBar/NavBar'
@@ -21,6 +22,7 @@ export default function MapViewPage() {
   const selectedTrail = useAppStore((s) => s.selectedTrail)
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const userLocation = useAppStore((s) => s.userLocation)
+  const locationFocusCount = useAppStore((s) => s.locationFocusCount)
 
   // Initialize map once
   useEffect(() => {
@@ -77,6 +79,14 @@ export default function MapViewPage() {
       if (selectedTrail) flyToTrail(viewRef.current!, selectedTrail)
     })
   }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Zoom to show both trail and user location on "Show my location"
+  useEffect(() => {
+    if (!viewRef.current || !selectedTrail || !userLocation || locationFocusCount === 0) return
+    viewRef.current.when(() => {
+      flyToTrailAndUser(viewRef.current!, selectedTrail, userLocation.lat, userLocation.lng)
+    })
+  }, [locationFocusCount]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="h-full flex flex-col">
