@@ -133,6 +133,21 @@ export function drawRouteIndicator(
   )
 }
 
+export function flyToTrail(view: __esri.MapView, trail: Trail) {
+  const hasRoute = trail.geometry.coordinates.length > 1
+  if (hasRoute) {
+    const polyline = new Polyline({
+      paths: [trail.geometry.coordinates],
+      spatialReference: { wkid: 4326 },
+    })
+    if (polyline.extent) {
+      view.goTo(polyline.extent.expand(1.6), { duration: 600 }).catch(() => {})
+      return
+    }
+  }
+  view.goTo({ center: [trail.lng, trail.lat], zoom: 15 }, { duration: 600 }).catch(() => {})
+}
+
 export function clearRouteIndicator(view: __esri.MapView) {
   if (!view.map) return
   const layer = view.map.findLayerById(ROUTE_LAYER_ID) as GraphicsLayer | undefined

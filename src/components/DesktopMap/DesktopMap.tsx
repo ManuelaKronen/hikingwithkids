@@ -5,6 +5,7 @@ import {
   initMap,
   updateTrailLayer,
   updateUserLocationOnMap,
+  flyToTrail,
   drawRouteIndicator,
   clearRouteIndicator,
 } from '../../utils/arcgis'
@@ -70,10 +71,7 @@ export default function DesktopMap() {
     if (!viewRef.current) return
     viewRef.current.when(() => {
       if (selectedTrail && userLocation) {
-        viewRef.current!.goTo(
-          { center: [selectedTrail.lng, selectedTrail.lat], zoom: 13 },
-          { duration: 500 }
-        )
+        flyToTrail(viewRef.current!, selectedTrail)
         drawRouteIndicator(
           viewRef.current!,
           userLocation.lat,

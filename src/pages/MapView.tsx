@@ -6,6 +6,7 @@ import {
   initMap,
   updateTrailLayer,
   updateUserLocationOnMap,
+  flyToTrail,
   drawRouteIndicator,
   clearRouteIndicator,
 } from '../utils/arcgis'
@@ -75,6 +76,7 @@ export default function MapViewPage() {
     if (!viewRef.current) return
     viewRef.current.when(() => {
       if (selectedTrail && userLocation) {
+        flyToTrail(viewRef.current!, selectedTrail)
         drawRouteIndicator(
           viewRef.current!,
           userLocation.lat,
