@@ -50,11 +50,16 @@ export default function TrailDetail() {
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
         {/* Photos */}
-        <div className="w-full bg-gradient-to-br from-green-50 to-teal-100 flex items-center justify-center text-gray-400" style={{ height: 160 }}>
-          <div className="text-center">
-            <p className="text-3xl">📷</p>
-            <p className="text-xs mt-1">Photos coming soon</p>
-          </div>
+        <div className="w-full bg-gradient-to-br from-green-50 to-teal-100 flex items-center justify-center text-gray-400 overflow-hidden" style={{ height: 160 }}>
+          {trail.photos[0]
+            ? <img src={trail.photos[0]} alt={trail.name} className="w-full h-full object-cover" />
+            : (
+              <div className="text-center">
+                <p className="text-3xl">📷</p>
+                <p className="text-xs mt-1">Photos coming soon</p>
+              </div>
+            )
+          }
         </div>
 
         <div className="px-4 pt-4">

@@ -55,7 +55,6 @@ interface AppState {
   trails: Trail[]
   filteredTrails: Trail[]
   activeFilters: FilterType[]
-  savedTrailIds: string[]
   userProfile: UserProfile
   selectedTrail: Trail | null
   userLocation: UserLocation | null
@@ -65,8 +64,6 @@ interface AppState {
   toggleFilter: (filter: FilterType) => void
   setSelectedTrail: (trail: Trail | null) => void
   setTrails: (trails: Trail[]) => void
-  updateProfile: (updates: Partial<UserProfile>) => void
-  addKid: (kid: { name: string; age: number }) => void
   markCompleted: (trailId: string) => void
   setUserLocation: (loc: UserLocation) => void
 }
@@ -78,7 +75,6 @@ export const useAppStore = create<AppState>()(
       filteredTrails: mockTrails,
       activeFilters: [],
       locationFocusCount: 0,
-      savedTrailIds: [],
       userProfile: defaultProfile,
       selectedTrail: null,
       userLocation: null,
@@ -103,19 +99,6 @@ export const useAppStore = create<AppState>()(
           filteredTrails: applyFilters(trails, state.activeFilters),
         })),
 
-      updateProfile: (updates) =>
-        set((state) => ({
-          userProfile: { ...state.userProfile, ...updates },
-        })),
-
-      addKid: (kid) =>
-        set((state) => ({
-          userProfile: {
-            ...state.userProfile,
-            kids: [...state.userProfile.kids, kid],
-          },
-        })),
-
       markCompleted: (trailId) =>
         set((state) => {
           if (state.userProfile.completedTrailIds.includes(trailId)) return state
@@ -132,7 +115,6 @@ export const useAppStore = create<AppState>()(
     {
       name: 'hiking-with-kids-storage',
       partialize: (state) => ({
-        savedTrailIds: state.savedTrailIds,
         userProfile: state.userProfile,
       }),
     }

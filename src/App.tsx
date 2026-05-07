@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route, useNavigate, useMatch } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import NavBar from './components/NavBar/NavBar'
 import DesktopMap from './components/DesktopMap/DesktopMap'
 import Explore from './pages/Explore'
 import MapViewPage from './pages/MapView'

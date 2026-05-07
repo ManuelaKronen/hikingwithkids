@@ -2,8 +2,6 @@
 
 @theme {
   --color-primary: #5BAE8A;
-  --color-primary-light: #EBF5F0;
-  --color-primary-mid: #B8DECE;
 
   --color-easy: #D0E8C4;
   --color-easy-text: #386630;
@@ -13,15 +11,8 @@
   --color-hard-text: #8A3620;
   --color-kid: #E0EDE6;
   --color-kid-text: #2D5A3D;
-  --color-age: #D4E8FA;
-  --color-age-text: #185FA5;
-  --color-heart: #D85A30;
 
   --color-surface: #FFFFFF;
-  --color-surface-secondary: #F4F0E6;
-  --color-label: #1a1a1a;
-  --color-label-secondary: #666660;
-  --color-label-tertiary: #9e9e96;
 }
 
 *,
