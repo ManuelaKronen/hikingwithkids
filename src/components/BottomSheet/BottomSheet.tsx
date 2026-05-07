@@ -21,13 +21,13 @@ export default function BottomSheet({ selectedTrail }: Props) {
       <div className="px-4 py-3 flex gap-2">
         <button
           onClick={requestLocationFocus}
-          className="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
+          className="flex-1 py-2.5 rounded-xl bg-[#7A5230] text-white text-sm font-semibold"
         >
           Show my location
         </button>
         <button
           onClick={handleDirections}
-          className="flex-1 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
+          className="flex-1 py-2.5 rounded-xl bg-[#7A5230] text-white text-sm font-semibold"
         >
           Directions to trailhead
         </button>

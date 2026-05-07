@@ -118,13 +118,13 @@ export default function TrailDetail() {
         <div className="bg-surface rounded-2xl shadow-sm p-3 flex flex-col gap-2">
           <button
             onClick={requestLocationFocus}
-            className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-[15px]"
+            className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
           >
             Show my location
           </button>
           <button
             onClick={handleStart}
-            className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-[15px]"
+            className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
           >
             Directions to trailhead
           </button>
