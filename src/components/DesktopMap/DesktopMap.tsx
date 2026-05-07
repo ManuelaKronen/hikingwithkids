@@ -6,8 +6,6 @@ import {
   updateTrailLayer,
   updateUserLocationOnMap,
   flyToTrail,
-  drawRouteIndicator,
-  clearRouteIndicator,
 } from '../../utils/arcgis'
 import type { Trail } from '../../types/trail'
 
@@ -72,20 +70,9 @@ export default function DesktopMap() {
     viewRef.current.when(() => {
       if (selectedTrail) {
         flyToTrail(viewRef.current!, selectedTrail)
-        if (userLocation) {
-          drawRouteIndicator(
-            viewRef.current!,
-            userLocation.lat,
-            userLocation.lng,
-            selectedTrail.lat,
-            selectedTrail.lng
-          )
-        }
-      } else {
-        clearRouteIndicator(viewRef.current!)
       }
     })
-  }, [selectedTrail?.id, userLocation?.lat, userLocation?.lng]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={mapRef} className="w-full h-full" />
 }
