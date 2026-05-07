@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
+import { useParams } from 'react-router-dom'
+import { Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import KidBadges from '../components/KidBadges/KidBadges'
 import NavBar from '../components/NavBar/NavBar'
@@ -19,7 +19,6 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
 
 export default function TrailDetail() {
   const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const requestLocationFocus = useAppStore((s) => s.requestLocationFocus)
@@ -47,13 +46,6 @@ export default function TrailDetail() {
   return (
     <div className="h-full flex flex-col overflow-hidden">
 
-      {/* Back button — desktop only */}
-      <div className="hidden md:flex items-center gap-2 px-4 py-2 shrink-0 border-b border-gray-100 bg-white">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-800 transition-colors">
-          <ArrowLeft size={16} strokeWidth={2} />
-          Back to list
-        </button>
-      </div>
 
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
