@@ -1,19 +1,52 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate, useMatch } from 'react-router-dom'
+import { Compass, Info, Map } from 'lucide-react'
+import { useAppStore } from '../../store/useAppStore'
 
 export default function NavBar() {
-  const cls = ({ isActive }: { isActive: boolean }) =>
-    `flex-1 py-2.5 text-center text-sm font-semibold rounded-xl transition-colors ${
-      isActive ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
-    }`
+  const selectedTrail = useAppStore((s) => s.selectedTrail)
+  const navigate = useNavigate()
+  const onDetailPage = useMatch('/trail/:id')
 
   return (
     <nav
-      className="md:hidden shrink-0 bg-white border-t border-gray-100 px-3 py-2"
+      className="md:hidden shrink-0 bg-white border-t border-gray-200"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="flex gap-2">
-        <NavLink to="/" end className={cls}>Explore</NavLink>
-        <NavLink to="/map" className={cls}>Map</NavLink>
+      <div className="flex">
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            `flex-1 flex flex-col items-center py-2 gap-0.5 text-[10px] font-medium transition-colors ${
+              isActive ? 'text-primary' : 'text-gray-400'
+            }`
+          }
+        >
+          <Compass size={22} strokeWidth={1.8} />
+          <span>Explore</span>
+        </NavLink>
+
+        <button
+          onClick={() => selectedTrail && navigate(`/trail/${selectedTrail.id}`)}
+          className={`flex-1 flex flex-col items-center py-2 gap-0.5 text-[10px] font-medium transition-colors ${
+            onDetailPage ? 'text-primary' : selectedTrail ? 'text-gray-400' : 'text-gray-200'
+          }`}
+        >
+          <Info size={22} strokeWidth={1.8} />
+          <span>Details</span>
+        </button>
+
+        <NavLink
+          to="/map"
+          className={({ isActive }) =>
+            `flex-1 flex flex-col items-center py-2 gap-0.5 text-[10px] font-medium transition-colors ${
+              isActive ? 'text-primary' : 'text-gray-400'
+            }`
+          }
+        >
+          <Map size={22} strokeWidth={1.8} />
+          <span>Map</span>
+        </NavLink>
       </div>
     </nav>
   )
