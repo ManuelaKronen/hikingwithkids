@@ -12,16 +12,17 @@ export default function Saved() {
   const savedTrails = allTrails.filter((t) => savedTrailIds.includes(t.id))
 
   return (
-    <div className="pb-20 min-h-full">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Top bar */}
-      <div className="sticky top-0 z-10 flex items-center gap-3 px-4 py-4 bg-white border-b border-gray-100">
+      <div className="shrink-0 flex items-center gap-3 px-4 py-4 bg-white border-b border-gray-100">
         <h1 className="flex-1 font-bold text-gray-900 text-lg">Rutas guardadas</h1>
         <button className="p-0.5">
           <SortDesc size={20} strokeWidth={1.8} className="text-gray-500" />
         </button>
       </div>
 
-      <div className="px-4 pt-4">
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto px-4 pt-4 pb-4">
         {savedTrails.length === 0 ? (
           <div className="text-center py-20">
             <p className="text-5xl mb-4">🤍</p>
@@ -39,7 +40,8 @@ export default function Saved() {
         ) : (
           <>
             <p className="text-xs text-gray-400 mb-3">
-              {savedTrails.length} {savedTrails.length === 1 ? 'ruta guardada' : 'rutas guardadas'}
+              {savedTrails.length}{' '}
+              {savedTrails.length === 1 ? 'ruta guardada' : 'rutas guardadas'}
             </p>
             <div className="space-y-3">
               {savedTrails.map((trail) => (

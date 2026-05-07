@@ -42,7 +42,7 @@ export default function TrailDetail() {
 
   if (!trail) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-400 pb-20">
+      <div className="h-full flex items-center justify-center text-gray-400">
         <p>Ruta no encontrada</p>
       </div>
     )
@@ -55,13 +55,13 @@ export default function TrailDetail() {
   }
 
   return (
-    <div className="pb-24 overflow-y-auto" style={{ height: '100dvh' }}>
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Top bar */}
-      <div className="sticky top-0 z-10 flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-100">
+      <div className="shrink-0 flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-100">
         <button onClick={() => navigate(-1)} className="p-0.5">
           <ArrowLeft size={22} strokeWidth={2} className="text-gray-700" />
         </button>
-        <h1 className="flex-1 font-semibold text-gray-900">Detalle de ruta</h1>
+        <h1 className="flex-1 font-semibold text-gray-900 truncate">{trail.name}</h1>
         <button onClick={() => toggleSaved(trail.id)} className="p-0.5">
           <span className="text-lg">{isSaved ? '❤️' : '🤍'}</span>
         </button>
@@ -70,68 +70,70 @@ export default function TrailDetail() {
         </button>
       </div>
 
-      {/* Mini map */}
-      <div ref={miniMapRef} style={{ height: 160 }} className="w-full bg-gray-100" />
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto">
+        {/* Mini map */}
+        <div ref={miniMapRef} style={{ height: 160 }} className="w-full bg-gray-100 shrink-0" />
 
-      {/* Content */}
-      <div className="px-4 pt-4">
-        <h2 className="text-[17px] font-bold text-gray-900 leading-snug">{trail.name}</h2>
-        <div className="flex items-center gap-1.5 mt-1 mb-4">
-          <MapPin size={14} className="text-gray-400" strokeWidth={1.8} />
-          <span className="text-sm text-gray-500">{trail.location}</span>
-          <span className="text-gray-300 mx-1">·</span>
-          <span className="text-xs text-gray-400">Act. {trail.lastUpdated}</span>
-        </div>
-
-        {/* Stats row */}
-        <div className="grid grid-cols-4 gap-2 mb-5">
-          {[
-            { icon: Ruler, label: 'Distancia', value: `${trail.distanceKm} km` },
-            { icon: Clock, label: 'Tiempo', value: `${trail.estimatedMinutes} min` },
-            { icon: TrendingUp, label: 'Desnivel', value: `${trail.elevationGainMeters} m` },
-            {
-              icon: () => <span className="text-base">🏔</span>,
-              label: 'Dificultad',
-              value: DIFFICULTY_LABEL[trail.difficulty],
-              valueClass: DIFFICULTY_CLASSES[trail.difficulty],
-            },
-          ].map(({ icon: Icon, label, value, valueClass }) => (
-            <div
-              key={label}
-              className="bg-gray-50 rounded-xl p-2.5 flex flex-col items-center gap-1"
-            >
-              <Icon size={18} strokeWidth={1.8} className="text-gray-500" />
-              <span className="text-[10px] text-gray-400">{label}</span>
-              <span
-                className={`text-xs font-semibold text-center leading-tight ${valueClass ?? 'text-gray-800'}`}
-              >
-                {value}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Kid features */}
-        <section className="mb-5">
-          <h3 className="text-sm font-semibold text-gray-700 mb-2">Para los peques</h3>
-          <KidBadges features={trail.kidFeatures} size="md" />
-        </section>
-
-        {/* Photos placeholder */}
-        <section className="mb-6">
-          <h3 className="text-sm font-semibold text-gray-700 mb-2">Fotos</h3>
-          <div className="rounded-2xl bg-gradient-to-br from-green-50 to-teal-100 h-40 flex items-center justify-center text-gray-400">
-            <div className="text-center">
-              <p className="text-3xl">📷</p>
-              <p className="text-xs mt-1">Fotos próximamente</p>
-            </div>
+        <div className="px-4 pt-4">
+          <h2 className="text-[17px] font-bold text-gray-900 leading-snug">{trail.name}</h2>
+          <div className="flex items-center gap-1.5 mt-1 mb-4">
+            <MapPin size={14} className="text-gray-400" strokeWidth={1.8} />
+            <span className="text-sm text-gray-500">{trail.location}</span>
+            <span className="text-gray-300 mx-1">·</span>
+            <span className="text-xs text-gray-400">Act. {trail.lastUpdated}</span>
           </div>
-        </section>
+
+          {/* Stats row */}
+          <div className="grid grid-cols-4 gap-2 mb-5">
+            {[
+              { icon: Ruler, label: 'Distancia', value: `${trail.distanceKm} km` },
+              { icon: Clock, label: 'Tiempo', value: `${trail.estimatedMinutes} min` },
+              { icon: TrendingUp, label: 'Desnivel', value: `${trail.elevationGainMeters} m` },
+              {
+                icon: () => <span className="text-base">🏔</span>,
+                label: 'Dificultad',
+                value: DIFFICULTY_LABEL[trail.difficulty],
+                valueClass: DIFFICULTY_CLASSES[trail.difficulty],
+              },
+            ].map(({ icon: Icon, label, value, valueClass }) => (
+              <div
+                key={label}
+                className="bg-gray-50 rounded-xl p-2.5 flex flex-col items-center gap-1"
+              >
+                <Icon size={18} strokeWidth={1.8} className="text-gray-500" />
+                <span className="text-[10px] text-gray-400">{label}</span>
+                <span
+                  className={`text-xs font-semibold text-center leading-tight ${valueClass ?? 'text-gray-800'}`}
+                >
+                  {value}
+                </span>
+              </div>
+            ))}
+          </div>
+
+          {/* Kid features */}
+          <section className="mb-5">
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">Para los peques</h3>
+            <KidBadges features={trail.kidFeatures} size="md" />
+          </section>
+
+          {/* Photos placeholder */}
+          <section className="mb-4">
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">Fotos</h3>
+            <div className="rounded-2xl bg-gradient-to-br from-green-50 to-teal-100 h-36 flex items-center justify-center text-gray-400">
+              <div className="text-center">
+                <p className="text-3xl">📷</p>
+                <p className="text-xs mt-1">Fotos próximamente</p>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
 
       {/* Sticky CTA */}
       <div
-        className="fixed bottom-0 left-0 right-0 max-w-[480px] mx-auto px-4 py-3 bg-white border-t border-gray-100"
+        className="shrink-0 px-4 py-3 bg-white border-t border-gray-100"
         style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)' }}
       >
         <button

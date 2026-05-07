@@ -21,10 +21,10 @@ export default function Explore() {
     : filteredTrails
 
   return (
-    <div className="pb-20 min-h-full">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Sticky header */}
-      <div className="sticky top-0 z-10 bg-surface px-4 pt-4 pb-2 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-3">
+      <div className="shrink-0 bg-white px-4 pt-4 pb-2 border-b border-gray-100">
+        <div className="flex items-center justify-between mb-3 md:hidden">
           <div className="flex items-center gap-2">
             <span className="text-xl">🏔</span>
             <span className="font-bold text-gray-900 text-lg">Hiking with Kids</span>
@@ -53,8 +53,8 @@ export default function Explore() {
         <FilterChips activeFilter={activeFilter} onFilterChange={setFilter} />
       </div>
 
-      {/* Trail list */}
-      <div className="px-4 pt-4">
+      {/* Scrollable trail list */}
+      <div className="flex-1 overflow-y-auto px-4 pt-4 pb-4">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
           Rutas cercanas · {displayed.length} resultados
         </p>

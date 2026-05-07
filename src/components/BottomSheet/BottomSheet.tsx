@@ -22,24 +22,16 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
 export default function BottomSheet({ selectedTrail, onClear }: Props) {
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
-  const height = expanded ? '60vh' : '120px'
+  const height = expanded ? '55vh' : '112px'
 
   return (
     <div
+      className="shrink-0 bg-white overflow-hidden"
       style={{
-        position: 'fixed',
-        bottom: 56,
-        left: 0,
-        right: 0,
-        maxWidth: 480,
-        margin: '0 auto',
         height,
         transition: 'height 0.3s cubic-bezier(0.4,0,0.2,1)',
-        background: 'white',
         borderRadius: '16px 16px 0 0',
         boxShadow: '0 -4px 20px rgba(0,0,0,0.10)',
-        zIndex: 40,
-        overflow: 'hidden',
       }}
     >
       {/* Drag handle */}

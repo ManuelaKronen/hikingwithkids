@@ -1,12 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
-import { useAppStore } from '../store/useAppStore'
-import { initMap } from '../utils/arcgis'
-import BottomSheet from '../components/BottomSheet/BottomSheet'
-import type { Trail } from '../types/trail'
+import { useAppStore } from '../../store/useAppStore'
+import { initMap } from '../../utils/arcgis'
+import type { Trail } from '../../types/trail'
 
-export default function MapViewPage() {
+export default function DesktopMap() {
   const mapRef = useRef<HTMLDivElement>(null)
   const viewRef = useRef<__esri.MapView | null>(null)
   const navigate = useNavigate()
@@ -31,10 +29,11 @@ export default function MapViewPage() {
           const trail = trails.find((t: Trail) => t.id === hit.graphic.attributes.trailId)
           if (trail) {
             setSelectedTrail(trail)
-            return
+            navigate(`/trail/${trail.id}`)
           }
+        } else {
+          setSelectedTrail(null)
         }
-        setSelectedTrail(null)
       })
     })
 
@@ -44,21 +43,14 @@ export default function MapViewPage() {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return (
-    <div className="h-full flex flex-col">
-      {/* Top bar */}
-      <div className="flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-100 z-10 shrink-0">
-        <button onClick={() => navigate(-1)} className="p-0.5">
-          <ArrowLeft size={22} strokeWidth={2} className="text-gray-700" />
-        </button>
-        <h1 className="flex-1 font-semibold text-gray-900">Mapa de rutas</h1>
-      </div>
+  // Pan to selected trail
+  useEffect(() => {
+    if (!viewRef.current || !selectedTrail) return
+    viewRef.current.goTo(
+      { center: [selectedTrail.lng, selectedTrail.lat], zoom: 13 },
+      { duration: 500 }
+    )
+  }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
-      {/* Map fills remaining space */}
-      <div ref={mapRef} className="flex-1 relative" />
-
-      {/* Bottom sheet */}
-      <BottomSheet selectedTrail={selectedTrail} onClear={() => setSelectedTrail(null)} />
-    </div>
-  )
+  return <div ref={mapRef} className="w-full h-full" />
 }

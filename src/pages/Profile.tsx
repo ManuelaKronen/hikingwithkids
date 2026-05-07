@@ -42,16 +42,17 @@ export default function Profile() {
   }
 
   return (
-    <div className="pb-20 min-h-full">
+    <div className="h-full flex flex-col overflow-hidden">
       {/* Top bar */}
-      <div className="sticky top-0 z-10 flex items-center gap-3 px-4 py-4 bg-white border-b border-gray-100">
+      <div className="shrink-0 flex items-center gap-3 px-4 py-4 bg-white border-b border-gray-100">
         <h1 className="flex-1 font-bold text-gray-900 text-lg">Mi perfil</h1>
         <button className="p-0.5">
           <Settings size={20} strokeWidth={1.8} className="text-gray-500" />
         </button>
       </div>
 
-      <div className="px-4 pt-5">
+      {/* Scrollable content */}
+      <div className="flex-1 overflow-y-auto px-4 pt-5 pb-6">
         {/* Avatar + name */}
         <div className="flex items-center gap-4 mb-5">
           <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold shrink-0">
@@ -60,8 +61,8 @@ export default function Profile() {
           <div>
             <h2 className="font-bold text-gray-900 text-lg">{userProfile.displayName}</h2>
             <p className="text-sm text-gray-500">
-              {userProfile.kids.length} {userProfile.kids.length === 1 ? 'peque' : 'peques'} ·{' '}
-              {userProfile.locationCity}
+              {userProfile.kids.length}{' '}
+              {userProfile.kids.length === 1 ? 'peque' : 'peques'} · {userProfile.locationCity}
             </p>
           </div>
         </div>
