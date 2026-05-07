@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
+import { Clock, TrendingUp, Ruler, MapPin, Mountain } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import KidBadges from '../components/KidBadges/KidBadges'
 import NavBar from '../components/NavBar/NavBar'
@@ -72,12 +72,7 @@ export default function TrailDetail() {
               { icon: Ruler, label: 'Distance', value: `${trail.distanceKm} km` },
               { icon: Clock, label: 'Time', value: `${trail.estimatedMinutes} min` },
               { icon: TrendingUp, label: 'Elevation', value: `${trail.elevationGainMeters} m` },
-              {
-                icon: () => <span className="text-base">🏔</span>,
-                label: 'Difficulty',
-                value: DIFFICULTY_LABEL[trail.difficulty],
-                valueClass: DIFFICULTY_CLASSES[trail.difficulty],
-              },
+              { icon: Mountain, label: 'Difficulty', value: DIFFICULTY_LABEL[trail.difficulty], valueClass: DIFFICULTY_CLASSES[trail.difficulty] },
             ].map(({ icon: Icon, label, value, valueClass }) => (
               <div
                 key={label}
