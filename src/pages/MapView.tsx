@@ -7,8 +7,6 @@ import {
   updateTrailLayer,
   updateUserLocationOnMap,
   flyToTrail,
-  drawRouteIndicator,
-  clearRouteIndicator,
 } from '../utils/arcgis'
 import BottomSheet from '../components/BottomSheet/BottomSheet'
 import type { Trail } from '../types/trail'
@@ -71,24 +69,13 @@ export default function MapViewPage() {
     })
   }, [userLocation?.lat, userLocation?.lng]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Draw route line when trail selected
+  // Zoom to trail when selected
   useEffect(() => {
     if (!viewRef.current) return
     viewRef.current.when(() => {
-      if (selectedTrail && userLocation) {
-        flyToTrail(viewRef.current!, selectedTrail)
-        drawRouteIndicator(
-          viewRef.current!,
-          userLocation.lat,
-          userLocation.lng,
-          selectedTrail.lat,
-          selectedTrail.lng
-        )
-      } else {
-        clearRouteIndicator(viewRef.current!)
-      }
+      if (selectedTrail) flyToTrail(viewRef.current!, selectedTrail)
     })
-  }, [selectedTrail?.id, userLocation?.lat, userLocation?.lng]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="h-full flex flex-col">
