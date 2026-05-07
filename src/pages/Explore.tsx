@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Bell, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import FilterChips from '../components/FilterChips/FilterChips'
 import TrailCard from '../components/TrailCard/TrailCard'
@@ -33,15 +33,6 @@ export default function Explore() {
     <div className="h-full flex flex-col overflow-hidden">
       {/* Sticky header */}
       <div className="shrink-0 bg-white px-4 pt-4 pb-2 border-b border-gray-100">
-        <div className="flex items-center justify-between mb-3 md:hidden">
-          <div className="flex items-center gap-2">
-            <span className="text-xl">🏔</span>
-            <span className="font-bold text-gray-900 text-lg">Hiking with Kids</span>
-          </div>
-          <button className="p-1">
-            <Bell size={22} strokeWidth={1.8} className="text-gray-500" />
-          </button>
-        </div>
 
         {/* Search */}
         <div className="relative">

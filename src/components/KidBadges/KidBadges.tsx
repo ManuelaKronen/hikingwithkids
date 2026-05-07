@@ -37,12 +37,6 @@ export default function KidBadges({ features, size = 'sm' }: Props) {
       style: 'bg-yellow-100 text-yellow-800',
     },
     {
-      show: features.dogFriendly,
-      emoji: '🐕',
-      label: 'Dogs OK',
-      style: 'bg-orange-100 text-orange-800',
-    },
-    {
       show: !!features.minRecommendedAge,
       emoji: '👶',
       label: `${features.minRecommendedAge}+ yrs`,

@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import { Trail, UserProfile, Difficulty } from '../types/trail'
 import { mockTrails } from '../data/mockTrails'
 
-export type FilterType = 'all' | 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic' | 'dog'
+export type FilterType = 'all' | 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic'
 
 const defaultProfile: UserProfile = {
   displayName: 'Lucía',
@@ -30,8 +30,7 @@ function applyFilter(trails: Trail[], filter: FilterType): Trail[] {
     case 'playground': return trails.filter((t) => t.kidFeatures.playground)
     case 'water':      return trails.filter((t) => t.kidFeatures.waterFountain)
     case 'picnic':     return trails.filter((t) => t.kidFeatures.picnicArea)
-    case 'dog':        return trails.filter((t) => t.kidFeatures.dogFriendly)
-    default:           return trails
+default:           return trails
   }
 }
 

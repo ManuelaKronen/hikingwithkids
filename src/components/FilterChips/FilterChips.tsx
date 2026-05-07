@@ -13,7 +13,6 @@ const tags: { id: FilterType; label: string; activeClass: string; size: 'md' | '
   { id: 'playground', label: '🛝 Playground', activeClass: 'bg-purple-100 text-purple-800',   size: 'sm' },
   { id: 'water',      label: '💧 Water',      activeClass: 'bg-blue-100 text-blue-800',       size: 'sm' },
   { id: 'picnic',     label: '🧺 Picnic',     activeClass: 'bg-yellow-100 text-yellow-800',   size: 'sm' },
-  { id: 'dog',        label: '🐕 Dogs OK',    activeClass: 'bg-orange-100 text-orange-800',   size: 'sm' },
 ]
 
 export default function FilterChips({ activeFilter, onFilterChange }: Props) {
