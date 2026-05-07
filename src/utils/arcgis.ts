@@ -76,7 +76,6 @@ export function updateTrailLayer(view: __esri.MapView, trails: Trail[]) {
 }
 
 const USER_LAYER_ID = 'user-location'
-const ROUTE_LAYER_ID = 'route-indicator'
 
 export function updateUserLocationOnMap(view: __esri.MapView, lat: number, lng: number) {
   if (!view.map) return
@@ -105,32 +104,6 @@ export function updateUserLocationOnMap(view: __esri.MapView, lat: number, lng: 
       }),
     }),
   ])
-}
-
-export function drawRouteIndicator(
-  view: __esri.MapView,
-  userLat: number,
-  userLng: number,
-  trailLat: number,
-  trailLng: number
-) {
-  if (!view.map) return
-  let layer = view.map.findLayerById(ROUTE_LAYER_ID) as GraphicsLayer | undefined
-  if (!layer) {
-    layer = new GraphicsLayer({ id: ROUTE_LAYER_ID })
-    view.map.add(layer)
-  }
-  layer.removeAll()
-  const line = new Polyline({
-    paths: [[[userLng, userLat], [trailLng, trailLat]]],
-    spatialReference: { wkid: 4326 },
-  })
-  layer.add(
-    new Graphic({
-      geometry: line,
-      symbol: new SimpleLineSymbol({ color: [66, 133, 244, 180], width: 2.5, style: 'dash' }),
-    })
-  )
 }
 
 export function flyToTrailAndUser(
@@ -165,54 +138,3 @@ export function flyToTrail(view: __esri.MapView, trail: Trail) {
   view.goTo({ center: [trail.lng, trail.lat], zoom: 15 }, { duration: 600 }).catch(() => {})
 }
 
-export function clearRouteIndicator(view: __esri.MapView) {
-  if (!view.map) return
-  const layer = view.map.findLayerById(ROUTE_LAYER_ID) as GraphicsLayer | undefined
-  if (layer) layer.removeAll()
-}
-
-export function initMiniMap(container: HTMLDivElement, trail: Trail): __esri.MapView {
-  setupEsri()
-  const color = COLORS[trail.difficulty] ?? COLORS.easy
-  const hasRoute = trail.geometry.coordinates.length > 1
-
-  const routeLayer = new GraphicsLayer()
-
-  const polyline = new Polyline({
-    paths: [trail.geometry.coordinates],
-    spatialReference: { wkid: 4326 },
-  })
-
-  if (hasRoute) {
-    routeLayer.add(new Graphic({
-      geometry: polyline,
-      symbol: new SimpleLineSymbol({ color, width: 3 }),
-    }))
-  }
-
-  routeLayer.add(new Graphic({
-    geometry: new Point({ longitude: trail.lng, latitude: trail.lat }),
-    symbol: new SimpleMarkerSymbol({
-      color,
-      size: 10,
-      outline: { color: [255, 255, 255, 255], width: 2 },
-    }),
-  }))
-
-  const map = new Map({ basemap: 'arcgis/outdoor', layers: [routeLayer] })
-  const view = new MapView({
-    container,
-    map,
-    center: [trail.lng, trail.lat],
-    zoom: 14,
-    ui: { components: [] },
-    navigation: { mouseWheelZoomEnabled: false, browserTouchPanEnabled: false },
-  })
-
-  view.when(() => {
-    const target = hasRoute && polyline.extent ? polyline.extent.expand(1.6) : view.center
-    view.goTo(target, { animate: false }).catch(() => {})
-  })
-
-  return view
-}

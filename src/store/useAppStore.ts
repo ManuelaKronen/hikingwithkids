@@ -63,7 +63,6 @@ interface AppState {
   locationFocusCount: number
   requestLocationFocus: () => void
   toggleFilter: (filter: FilterType) => void
-  toggleSaved: (trailId: string) => void
   setSelectedTrail: (trail: Trail | null) => void
   setTrails: (trails: Trail[]) => void
   updateProfile: (updates: Partial<UserProfile>) => void
@@ -94,16 +93,6 @@ export const useAppStore = create<AppState>()(
             ? state.activeFilters.filter((f) => f !== filter)
             : [...state.activeFilters, filter]
           return { activeFilters: next, filteredTrails: applyFilters(state.trails, next) }
-        }),
-
-      toggleSaved: (trailId) =>
-        set((state) => {
-          const isSaved = state.savedTrailIds.includes(trailId)
-          return {
-            savedTrailIds: isSaved
-              ? state.savedTrailIds.filter((id) => id !== trailId)
-              : [...state.savedTrailIds, trailId],
-          }
         }),
 
       setSelectedTrail: (trail) => set({ selectedTrail: trail }),

@@ -106,7 +106,7 @@ export default function MapViewPage() {
       <div ref={mapRef} className="flex-1 relative" />
 
       {selectedTrail && (
-        <BottomSheet selectedTrail={selectedTrail} onClear={() => setSelectedTrail(null)} />
+        <BottomSheet selectedTrail={selectedTrail} />
       )}
       <NavBar />
     </div>

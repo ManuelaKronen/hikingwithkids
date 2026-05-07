@@ -3,7 +3,6 @@ import { useAppStore } from '../../store/useAppStore'
 
 interface Props {
   selectedTrail: Trail
-  onClear: () => void
 }
 
 export default function BottomSheet({ selectedTrail }: Props) {
