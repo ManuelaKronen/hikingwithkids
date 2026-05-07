@@ -32,10 +32,13 @@ export default function Explore() {
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
-      {/* Sticky header */}
-      <div className="shrink-0 bg-surface px-4 pt-4 pb-2 border-b border-gray-100">
+      {/* Title band — mobile only */}
+      <div className="md:hidden shrink-0 bg-[#7A5230] px-4 py-3">
+        <p className="font-bold text-[#F8F0E3] text-lg">Hiking with Kids</p>
+      </div>
 
-        <p className="font-bold text-gray-900 text-lg mb-3 md:hidden">Hiking with Kids</p>
+      {/* Sticky header */}
+      <div className="shrink-0 bg-surface px-4 pt-3 pb-2 border-b border-gray-100">
 
         {/* Search */}
         <div className="relative">
