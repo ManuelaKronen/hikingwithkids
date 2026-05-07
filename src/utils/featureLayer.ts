@@ -44,8 +44,11 @@ function featureToTrail(feature: __esri.Graphic): Trail {
 }
 
 export async function fetchTrailsFromLayer(): Promise<Trail[]> {
-  const url = import.meta.env.VITE_ESRI_FEATURE_LAYER_URL
-  if (!url) return []
+  const base = import.meta.env.VITE_ESRI_FEATURE_LAYER_URL
+  if (!base) return []
+
+  // FeatureLayer needs a layer index; append /0 if not already present
+  const url = /\/\d+$/.test(base.replace(/\/$/, '')) ? base : `${base.replace(/\/$/, '')}/0`
 
   setupKey()
 
