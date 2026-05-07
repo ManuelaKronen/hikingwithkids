@@ -7,9 +7,25 @@ import TrailDetail from './pages/TrailDetail'
 import Saved from './pages/Saved'
 import Profile from './pages/Profile'
 import { useLocation } from './hooks/useLocation'
+import { useEffect } from 'react'
+import { useAppStore } from './store/useAppStore'
+import { fetchTrailsFromLayer } from './utils/featureLayer'
 
 function LocationInit() {
   useLocation()
+  return null
+}
+
+function TrailsInit() {
+  const setTrails = useAppStore((s) => s.setTrails)
+
+  useEffect(() => {
+    if (!import.meta.env.VITE_ESRI_FEATURE_LAYER_URL) return
+    fetchTrailsFromLayer()
+      .then((trails) => { if (trails.length > 0) setTrails(trails) })
+      .catch(console.error)
+  }, [setTrails])
+
   return null
 }
 
@@ -40,6 +56,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <LocationInit />
+      <TrailsInit />
       <div className="flex" style={{ height: '100dvh' }}>
         {/* Left panel — sidebar on desktop, full width on mobile */}
         <div className="flex flex-col w-full md:w-[400px] md:shrink-0 md:border-r md:border-gray-200 overflow-hidden">
