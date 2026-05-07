@@ -35,7 +35,12 @@ export default function Explore() {
       {/* Sticky header */}
       <div className="shrink-0 bg-[#7A5230] px-4 pt-3 pb-3 border-b border-[#5A3A1A]">
 
-        <p className="font-bold text-[#F8F0E3] text-lg mb-3 md:hidden uppercase tracking-wide">🥾 Hiking with Kids</p>
+        <div className="flex items-center gap-3 mb-3 md:hidden">
+          <div className="w-9 h-9 rounded-full bg-[#F8F0E3] flex items-center justify-center text-lg shrink-0">
+            🥾
+          </div>
+          <span className="font-bold text-[#F8F0E3] text-lg uppercase tracking-wide">Hiking with Kids</span>
+        </div>
 
         {/* Search */}
         <div className="relative">

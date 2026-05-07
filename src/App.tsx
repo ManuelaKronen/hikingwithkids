@@ -34,7 +34,12 @@ function DesktopTopNav() {
 
   return (
     <div className="hidden md:flex items-center px-4 py-3 border-b border-[#5A3A1A] bg-[#7A5230] shrink-0">
-      <span className="font-bold text-[#F8F0E3] flex-1 uppercase tracking-wide">🥾 Hiking with Kids</span>
+      <div className="flex items-center gap-3 flex-1">
+        <div className="w-8 h-8 rounded-full bg-[#F8F0E3] flex items-center justify-center text-base shrink-0">
+          🥾
+        </div>
+        <span className="font-bold text-[#F8F0E3] uppercase tracking-wide">Hiking with Kids</span>
+      </div>
       {onDetailPage && (
         <button
           onClick={() => navigate(-1)}
