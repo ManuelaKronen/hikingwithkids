@@ -7,7 +7,6 @@ interface Props {
   distanceFromUser?: number
 }
 
-
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: 'Easy',
   moderate: 'Moderate',
@@ -19,11 +18,19 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
 
   return (
     <div
-      className="flex items-center gap-3 bg-[#EFF7F3] rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
+      className="flex items-stretch bg-[#EFF7F3] rounded-2xl shadow-sm overflow-hidden active:opacity-80 cursor-pointer"
       onClick={() => navigate(`/trail/${trail.id}`)}
     >
+      {/* Photo thumbnail */}
+      <div className="w-20 shrink-0 bg-gradient-to-br from-[#C8DDD4] to-[#8DB89E] flex items-center justify-center">
+        {trail.photos[0]
+          ? <img src={trail.photos[0]} alt={trail.name} className="w-full h-full object-cover" />
+          : <span className="text-3xl">📷</span>
+        }
+      </div>
+
       {/* Info */}
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 p-3">
         <p className="font-semibold text-gray-900 text-[15px] leading-snug truncate">
           {trail.name}
         </p>
@@ -58,7 +65,6 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
           )}
         </div>
       </div>
-
     </div>
   )
 }
