@@ -36,12 +36,6 @@ export default function KidBadges({ features, size = 'sm' }: Props) {
       label: 'Picnic',
       style: 'bg-yellow-100 text-yellow-800',
     },
-    {
-      show: !!features.minRecommendedAge,
-      emoji: '👶',
-      label: `${features.minRecommendedAge}+ yrs`,
-      style: 'bg-age text-age-text',
-    },
   ]
 
   return (
