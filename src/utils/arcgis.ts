@@ -23,14 +23,36 @@ function setupEsri() {
 function buildTrailLayer(trails: Trail[]): GraphicsLayer {
   const layer = new GraphicsLayer({ id: 'trails' })
   trails.forEach((trail) => {
-    const point = new Point({ longitude: trail.lng, latitude: trail.lat })
     const color = COLORS[trail.difficulty] ?? COLORS.easy
-    const symbol = new SimpleMarkerSymbol({
-      color,
-      size: 14,
-      outline: { color: [255, 255, 255, 255], width: 2 },
-    })
-    layer.add(new Graphic({ geometry: point, symbol, attributes: { trailId: trail.id } }))
+
+    // Route polyline
+    if (trail.geometry.coordinates.length > 1) {
+      const polyline = new Polyline({
+        paths: [trail.geometry.coordinates],
+        spatialReference: { wkid: 4326 },
+      })
+      layer.add(
+        new Graphic({
+          geometry: polyline,
+          symbol: new SimpleLineSymbol({ color, width: 3 }),
+          attributes: { trailId: trail.id },
+        })
+      )
+    }
+
+    // Trailhead dot for click target
+    const point = new Point({ longitude: trail.lng, latitude: trail.lat })
+    layer.add(
+      new Graphic({
+        geometry: point,
+        symbol: new SimpleMarkerSymbol({
+          color,
+          size: 12,
+          outline: { color: [255, 255, 255, 255], width: 2 },
+        }),
+        attributes: { trailId: trail.id },
+      })
+    )
   })
   return layer
 }

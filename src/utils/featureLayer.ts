@@ -21,7 +21,7 @@ function featureToTrail(feature: __esri.Graphic): Trail {
     distanceKm: a.distance_km ?? 0,
     estimatedMinutes: a.estimated_minutes ?? 0,
     elevationGainMeters: a.elevation_gain_m ?? 0,
-    difficulty: (a.difficulty as Difficulty) ?? 'easy',
+    difficulty: ((a.difficulty as string)?.toLowerCase() as Difficulty) ?? 'easy',
     kidFeatures: {
       strollerFriendly: a.stroller_friendly === 1,
       playground: a.playground === 1,
