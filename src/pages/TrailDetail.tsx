@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { ArrowLeft, Share2, Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
+import { useParams } from 'react-router-dom'
+import { Clock, TrendingUp, Ruler, MapPin } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import KidBadges from '../components/KidBadges/KidBadges'
 import NavBar from '../components/NavBar/NavBar'
@@ -19,7 +19,6 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
 
 export default function TrailDetail() {
   const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const requestLocationFocus = useAppStore((s) => s.requestLocationFocus)
@@ -46,16 +45,6 @@ export default function TrailDetail() {
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
-      {/* Top bar */}
-      <div className="shrink-0 flex items-center gap-3 px-4 py-3 bg-white border-b border-gray-100">
-        <button onClick={() => navigate(-1)} className="p-0.5">
-          <ArrowLeft size={22} strokeWidth={2} className="text-gray-700" />
-        </button>
-        <h1 className="flex-1 font-semibold text-gray-900 truncate">{trail.name}</h1>
-        <button className="p-0.5">
-          <Share2 size={20} strokeWidth={1.8} className="text-gray-500" />
-        </button>
-      </div>
 
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto">
