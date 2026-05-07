@@ -28,7 +28,6 @@ export default function TrailDetail() {
   // Keep selected trail in sync so the desktop map zooms to it
   useEffect(() => {
     if (trail) setSelectedTrail(trail)
-    return () => setSelectedTrail(null)
   }, [trail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!trail) {
