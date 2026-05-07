@@ -21,6 +21,8 @@ const defaultProfile: UserProfile = {
   completedTrailIds: [],
 }
 
+const initialTrails = import.meta.env.VITE_ESRI_FEATURE_LAYER_URL ? [] : mockTrails
+
 const DIFFICULTY_SET = new Set<FilterType>(['easy', 'moderate', 'hard'])
 
 function applyFilters(trails: Trail[], filters: FilterType[]): Trail[] {
@@ -71,8 +73,8 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      trails: mockTrails,
-      filteredTrails: mockTrails,
+      trails: initialTrails,
+      filteredTrails: initialTrails,
       activeFilters: [],
       locationFocusCount: 0,
       userProfile: defaultProfile,
