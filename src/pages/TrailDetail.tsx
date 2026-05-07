@@ -98,7 +98,7 @@ export default function TrailDetail() {
           {trail.kidFeatures.minRecommendedAge && (
             <section className="mb-5">
               <h3 className="text-sm font-semibold text-gray-700 mb-2">Recommended age</h3>
-              <span className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full font-medium bg-age text-age-text">
+              <span className="inline-flex items-center gap-1 text-xs px-2.5 py-1 rounded-full font-medium bg-kid text-kid-text">
                 👶 {trail.kidFeatures.minRecommendedAge}+ yrs
               </span>
             </section>
