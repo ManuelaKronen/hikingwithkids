@@ -133,6 +133,23 @@ export function drawRouteIndicator(
   )
 }
 
+export function flyToTrailAndUser(
+  view: __esri.MapView,
+  trail: Trail,
+  userLat: number,
+  userLng: number
+) {
+  const userPoint = new Point({ longitude: userLng, latitude: userLat })
+  const hasRoute = trail.geometry.coordinates.length > 1
+  const targets: (Point | Polyline)[] = [userPoint]
+  if (hasRoute) {
+    targets.push(new Polyline({ paths: [trail.geometry.coordinates], spatialReference: { wkid: 4326 } }))
+  } else {
+    targets.push(new Point({ longitude: trail.lng, latitude: trail.lat }))
+  }
+  view.goTo(targets, { duration: 700 }).catch(() => {})
+}
+
 export function flyToTrail(view: __esri.MapView, trail: Trail) {
   const hasRoute = trail.geometry.coordinates.length > 1
   if (hasRoute) {

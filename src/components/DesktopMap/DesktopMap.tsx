@@ -6,6 +6,7 @@ import {
   updateTrailLayer,
   updateUserLocationOnMap,
   flyToTrail,
+  flyToTrailAndUser,
 } from '../../utils/arcgis'
 import type { Trail } from '../../types/trail'
 
@@ -18,6 +19,7 @@ export default function DesktopMap() {
   const selectedTrail = useAppStore((s) => s.selectedTrail)
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const userLocation = useAppStore((s) => s.userLocation)
+  const locationFocusCount = useAppStore((s) => s.locationFocusCount)
 
   // Initialize map once
   useEffect(() => {
@@ -73,6 +75,14 @@ export default function DesktopMap() {
       }
     })
   }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Zoom to show both trail and user location
+  useEffect(() => {
+    if (!viewRef.current || !selectedTrail || !userLocation || locationFocusCount === 0) return
+    viewRef.current.when(() => {
+      flyToTrailAndUser(viewRef.current!, selectedTrail, userLocation.lat, userLocation.lng)
+    })
+  }, [locationFocusCount]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={mapRef} className="w-full h-full" />
 }

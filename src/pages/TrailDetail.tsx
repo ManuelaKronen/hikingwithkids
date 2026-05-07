@@ -25,6 +25,7 @@ export default function TrailDetail() {
 
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
+  const requestLocationFocus = useAppStore((s) => s.requestLocationFocus)
   const markCompleted = useAppStore((s) => s.markCompleted)
 
   // Keep selected trail in sync so the desktop map zooms to it
@@ -146,6 +147,12 @@ export default function TrailDetail() {
         className="shrink-0 px-4 py-3 bg-white border-t border-gray-100"
         style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)' }}
       >
+        <button
+          onClick={requestLocationFocus}
+          className="w-full py-3 rounded-2xl border border-primary text-primary font-semibold text-[15px] mb-2"
+        >
+          Show my location
+        </button>
         <button
           onClick={handleStart}
           className="w-full py-3.5 rounded-2xl bg-primary text-white font-semibold text-[15px]"

@@ -60,6 +60,8 @@ interface AppState {
   selectedTrail: Trail | null
   userLocation: UserLocation | null
 
+  locationFocusCount: number
+  requestLocationFocus: () => void
   toggleFilter: (filter: FilterType) => void
   toggleSaved: (trailId: string) => void
   setSelectedTrail: (trail: Trail | null) => void
@@ -76,10 +78,14 @@ export const useAppStore = create<AppState>()(
       trails: mockTrails,
       filteredTrails: mockTrails,
       activeFilters: [],
+      locationFocusCount: 0,
       savedTrailIds: [],
       userProfile: defaultProfile,
       selectedTrail: null,
       userLocation: null,
+
+      requestLocationFocus: () =>
+        set((state) => ({ locationFocusCount: state.locationFocusCount + 1 })),
 
       toggleFilter: (filter) =>
         set((state) => {
