@@ -7,8 +7,8 @@ import { haversineKm } from '../utils/geo'
 
 export default function Explore() {
   const filteredTrails = useAppStore((s) => s.filteredTrails)
-  const activeFilter = useAppStore((s) => s.activeFilter)
-  const setFilter = useAppStore((s) => s.setFilter)
+  const activeFilters = useAppStore((s) => s.activeFilters)
+  const toggleFilter = useAppStore((s) => s.toggleFilter)
   const userLocation = useAppStore((s) => s.userLocation)
   const [query, setQuery] = useState('')
 
@@ -52,7 +52,7 @@ export default function Explore() {
           />
         </div>
 
-        <FilterChips activeFilter={activeFilter} onFilterChange={setFilter} />
+        <FilterChips activeFilters={activeFilters} onToggleFilter={toggleFilter} />
       </div>
 
       {/* Scrollable trail list */}

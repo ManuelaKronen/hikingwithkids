@@ -1,8 +1,8 @@
 import { FilterType } from '../../store/useAppStore'
 
 interface Props {
-  activeFilter: FilterType
-  onFilterChange: (filter: FilterType) => void
+  activeFilters: FilterType[]
+  onToggleFilter: (filter: FilterType) => void
 }
 
 const difficultyTags: { id: FilterType; label: string; activeClass: string }[] = [
@@ -23,20 +23,20 @@ function Tag({
   label,
   activeClass,
   size,
-  activeFilter,
-  onFilterChange,
+  activeFilters,
+  onToggleFilter,
 }: {
   id: FilterType
   label: string
   activeClass: string
   size: 'md' | 'sm'
-  activeFilter: FilterType
-  onFilterChange: (f: FilterType) => void
+  activeFilters: FilterType[]
+  onToggleFilter: (f: FilterType) => void
 }) {
-  const isActive = activeFilter === id
+  const isActive = activeFilters.includes(id)
   return (
     <button
-      onClick={() => onFilterChange(activeFilter === id ? 'all' : id)}
+      onClick={() => onToggleFilter(id)}
       className={`rounded-full border transition-all ${
         size === 'md' ? 'text-sm px-3 py-1.5' : 'text-[11px] px-2.5 py-1'
       } ${
@@ -50,17 +50,17 @@ function Tag({
   )
 }
 
-export default function FilterChips({ activeFilter, onFilterChange }: Props) {
+export default function FilterChips({ activeFilters, onToggleFilter }: Props) {
   return (
     <div className="flex flex-col gap-2 mt-3">
       <div className="flex gap-1.5">
         {difficultyTags.map((t) => (
-          <Tag key={t.id} {...t} size="md" activeFilter={activeFilter} onFilterChange={onFilterChange} />
+          <Tag key={t.id} {...t} size="md" activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
         ))}
       </div>
       <div className="flex flex-wrap gap-1.5">
         {kidTags.map((t) => (
-          <Tag key={t.id} {...t} size="sm" activeFilter={activeFilter} onFilterChange={onFilterChange} />
+          <Tag key={t.id} {...t} size="sm" activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
         ))}
       </div>
     </div>

@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import { Trail, UserProfile, Difficulty } from '../types/trail'
 import { mockTrails } from '../data/mockTrails'
 
-export type FilterType = 'all' | 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic'
+export type FilterType = 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic'
 
 const defaultProfile: UserProfile = {
   displayName: 'Lucía',
@@ -21,17 +21,29 @@ const defaultProfile: UserProfile = {
   completedTrailIds: [],
 }
 
-function applyFilter(trails: Trail[], filter: FilterType): Trail[] {
-  switch (filter) {
-    case 'easy':       return trails.filter((t) => t.difficulty === 'easy')
-    case 'moderate':   return trails.filter((t) => t.difficulty === 'moderate')
-    case 'hard':       return trails.filter((t) => t.difficulty === 'hard')
-    case 'stroller':   return trails.filter((t) => t.kidFeatures.strollerFriendly)
-    case 'playground': return trails.filter((t) => t.kidFeatures.playground)
-    case 'water':      return trails.filter((t) => t.kidFeatures.waterFountain)
-    case 'picnic':     return trails.filter((t) => t.kidFeatures.picnicArea)
-default:           return trails
-  }
+const DIFFICULTY_SET = new Set<FilterType>(['easy', 'moderate', 'hard'])
+
+function applyFilters(trails: Trail[], filters: FilterType[]): Trail[] {
+  if (filters.length === 0) return trails
+  const diff = filters.filter((f) => DIFFICULTY_SET.has(f))
+  const kids = filters.filter((f) => !DIFFICULTY_SET.has(f))
+  return trails.filter((t) => {
+    const okDiff =
+      diff.length === 0 ||
+      diff.some((f) =>
+        f === 'easy' ? t.difficulty === 'easy' :
+        f === 'moderate' ? t.difficulty === 'moderate' :
+        t.difficulty === 'hard'
+      )
+    const okKids = kids.every((f) =>
+      f === 'stroller'   ? t.kidFeatures.strollerFriendly :
+      f === 'playground' ? t.kidFeatures.playground :
+      f === 'water'      ? t.kidFeatures.waterFountain :
+      f === 'picnic'     ? t.kidFeatures.picnicArea :
+      true
+    )
+    return okDiff && okKids
+  })
 }
 
 export interface UserLocation {
@@ -42,13 +54,13 @@ export interface UserLocation {
 interface AppState {
   trails: Trail[]
   filteredTrails: Trail[]
-  activeFilter: FilterType
+  activeFilters: FilterType[]
   savedTrailIds: string[]
   userProfile: UserProfile
   selectedTrail: Trail | null
   userLocation: UserLocation | null
 
-  setFilter: (filter: FilterType) => void
+  toggleFilter: (filter: FilterType) => void
   toggleSaved: (trailId: string) => void
   setSelectedTrail: (trail: Trail | null) => void
   setTrails: (trails: Trail[]) => void
@@ -63,17 +75,20 @@ export const useAppStore = create<AppState>()(
     (set) => ({
       trails: mockTrails,
       filteredTrails: mockTrails,
-      activeFilter: 'all',
+      activeFilters: [],
       savedTrailIds: [],
       userProfile: defaultProfile,
       selectedTrail: null,
       userLocation: null,
 
-      setFilter: (filter) =>
-        set((state) => ({
-          activeFilter: filter,
-          filteredTrails: applyFilter(state.trails, filter),
-        })),
+      toggleFilter: (filter) =>
+        set((state) => {
+          const already = state.activeFilters.includes(filter)
+          const next = already
+            ? state.activeFilters.filter((f) => f !== filter)
+            : [...state.activeFilters, filter]
+          return { activeFilters: next, filteredTrails: applyFilters(state.trails, next) }
+        }),
 
       toggleSaved: (trailId) =>
         set((state) => {
@@ -90,7 +105,7 @@ export const useAppStore = create<AppState>()(
       setTrails: (trails) =>
         set((state) => ({
           trails,
-          filteredTrails: applyFilter(trails, state.activeFilter),
+          filteredTrails: applyFilters(trails, state.activeFilters),
         })),
 
       updateProfile: (updates) =>
