@@ -19,18 +19,12 @@ const DIFFICULTY_LABEL: Record<string, string> = {
   hard: 'Hard',
 }
 
-const DIFFICULTY_CLASSES: Record<string, string> = {
-  easy: 'bg-easy text-easy-text',
-  moderate: 'bg-moderate text-moderate-text',
-  hard: 'bg-hard text-hard-text',
-}
-
 export default function TrailCard({ trail, distanceFromUser }: Props) {
   const navigate = useNavigate()
 
   return (
     <div
-      className="flex items-center gap-3 bg-surface rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
+      className="flex items-center gap-3 bg-[#EFF7F3] rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
       onClick={() => navigate(`/trail/${trail.id}`)}
     >
       {/* Thumbnail */}
@@ -54,11 +48,11 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
           </p>
         )}
         <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-          <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty] ?? 'bg-gray-100 text-gray-600'}`}>
+          <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">
             {DIFFICULTY_LABEL[trail.difficulty] ?? trail.difficulty}
           </span>
           {trail.kidFeatures.minRecommendedAge && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-age text-age-text">
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">
               👶 {trail.kidFeatures.minRecommendedAge}+
             </span>
           )}
