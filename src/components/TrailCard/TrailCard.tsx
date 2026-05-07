@@ -7,11 +7,6 @@ interface Props {
   distanceFromUser?: number
 }
 
-const GRADIENTS: Record<string, string> = {
-  easy: 'from-emerald-200 to-green-600',
-  moderate: 'from-amber-200 to-amber-500',
-  hard: 'from-orange-300 to-red-500',
-}
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: 'Easy',
@@ -27,13 +22,6 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
       className="flex items-center gap-3 bg-[#EFF7F3] rounded-2xl p-3 shadow-sm active:opacity-80 cursor-pointer"
       onClick={() => navigate(`/trail/${trail.id}`)}
     >
-      {/* Thumbnail */}
-      <div
-        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${GRADIENTS[trail.difficulty] ?? GRADIENTS.easy} flex items-center justify-center shrink-0 text-2xl`}
-      >
-        🏞
-      </div>
-
       {/* Info */}
       <div className="flex-1 min-w-0">
         <p className="font-semibold text-gray-900 text-[15px] leading-snug truncate">
