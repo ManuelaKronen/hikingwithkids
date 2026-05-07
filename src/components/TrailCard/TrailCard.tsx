@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import { Heart } from 'lucide-react'
 import { Trail } from '../../types/trail'
+import { formatDistanceFromUser } from '../../utils/geo'
 
 interface Props {
   trail: Trail
   isSaved: boolean
   onToggleSaved: () => void
+  distanceFromUser?: number
 }
 
 const GRADIENTS: Record<string, string> = {
@@ -26,7 +28,7 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
   hard: 'bg-red-100 text-red-800',
 }
 
-export default function TrailCard({ trail, isSaved, onToggleSaved }: Props) {
+export default function TrailCard({ trail, isSaved, onToggleSaved, distanceFromUser }: Props) {
   const navigate = useNavigate()
 
   return (
@@ -49,6 +51,11 @@ export default function TrailCard({ trail, isSaved, onToggleSaved }: Props) {
         <p className="text-xs text-gray-500 mt-0.5">
           {trail.distanceKm} km · {trail.estimatedMinutes} min · {trail.location}
         </p>
+        {distanceFromUser !== undefined && (
+          <p className="text-xs text-primary font-medium mt-0.5">
+            📍 {formatDistanceFromUser(distanceFromUser)}
+          </p>
+        )}
         <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
           <span
             className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty]}`}

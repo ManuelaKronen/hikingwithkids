@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../../store/useAppStore'
-import { initMap } from '../../utils/arcgis'
+import {
+  initMap,
+  updateUserLocationOnMap,
+  drawRouteIndicator,
+  clearRouteIndicator,
+} from '../../utils/arcgis'
 import type { Trail } from '../../types/trail'
 
 export default function DesktopMap() {
@@ -12,7 +17,9 @@ export default function DesktopMap() {
   const trails = useAppStore((s) => s.trails)
   const selectedTrail = useAppStore((s) => s.selectedTrail)
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
+  const userLocation = useAppStore((s) => s.userLocation)
 
+  // Initialize map once
   useEffect(() => {
     if (!mapRef.current || viewRef.current) return
 
@@ -43,14 +50,35 @@ export default function DesktopMap() {
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Pan to selected trail
+  // Update user location dot
   useEffect(() => {
-    if (!viewRef.current || !selectedTrail) return
-    viewRef.current.goTo(
-      { center: [selectedTrail.lng, selectedTrail.lat], zoom: 13 },
-      { duration: 500 }
-    )
-  }, [selectedTrail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
+    if (!viewRef.current || !userLocation) return
+    viewRef.current.when(() => {
+      updateUserLocationOnMap(viewRef.current!, userLocation.lat, userLocation.lng)
+    })
+  }, [userLocation?.lat, userLocation?.lng]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Pan to trail + draw route line
+  useEffect(() => {
+    if (!viewRef.current) return
+    viewRef.current.when(() => {
+      if (selectedTrail && userLocation) {
+        viewRef.current!.goTo(
+          { center: [selectedTrail.lng, selectedTrail.lat], zoom: 13 },
+          { duration: 500 }
+        )
+        drawRouteIndicator(
+          viewRef.current!,
+          userLocation.lat,
+          userLocation.lng,
+          selectedTrail.lat,
+          selectedTrail.lng
+        )
+      } else {
+        clearRouteIndicator(viewRef.current!)
+      }
+    })
+  }, [selectedTrail?.id, userLocation?.lat, userLocation?.lng]) // eslint-disable-line react-hooks/exhaustive-deps
 
   return <div ref={mapRef} className="w-full h-full" />
 }

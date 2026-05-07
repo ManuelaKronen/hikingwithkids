@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Bell, Search } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import FilterChips from '../components/FilterChips/FilterChips'
 import TrailCard from '../components/TrailCard/TrailCard'
+import { haversineKm } from '../utils/geo'
 
 export default function Explore() {
   const filteredTrails = useAppStore((s) => s.filteredTrails)
@@ -10,15 +11,25 @@ export default function Explore() {
   const toggleSaved = useAppStore((s) => s.toggleSaved)
   const activeFilter = useAppStore((s) => s.activeFilter)
   const setFilter = useAppStore((s) => s.setFilter)
+  const userLocation = useAppStore((s) => s.userLocation)
   const [query, setQuery] = useState('')
 
-  const displayed = query
+  const searched = query
     ? filteredTrails.filter(
         (t) =>
           t.name.toLowerCase().includes(query.toLowerCase()) ||
           t.location.toLowerCase().includes(query.toLowerCase())
       )
     : filteredTrails
+
+  const displayed = useMemo(() => {
+    if (!userLocation) return searched
+    return [...searched].sort(
+      (a, b) =>
+        haversineKm(userLocation.lat, userLocation.lng, a.lat, a.lng) -
+        haversineKm(userLocation.lat, userLocation.lng, b.lat, b.lng)
+    )
+  }, [searched, userLocation])
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -72,6 +83,11 @@ export default function Explore() {
                 trail={trail}
                 isSaved={savedTrailIds.includes(trail.id)}
                 onToggleSaved={() => toggleSaved(trail.id)}
+                distanceFromUser={
+                  userLocation
+                    ? haversineKm(userLocation.lat, userLocation.lng, trail.lat, trail.lng)
+                    : undefined
+                }
               />
             ))}
           </div>

@@ -1,30 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useAppStore } from '../store/useAppStore'
 
-interface GeoLocation {
-  lat: number
-  lng: number
-}
-
-const MADRID_DEFAULT: GeoLocation = { lat: 40.4168, lng: -3.7038 }
+const MADRID_DEFAULT = { lat: 40.4168, lng: -3.7038 }
 
 export function useLocation() {
-  const [location, setLocation] = useState<GeoLocation>(MADRID_DEFAULT)
-  const [loading, setLoading] = useState(true)
+  const setUserLocation = useAppStore((s) => s.setUserLocation)
 
   useEffect(() => {
-    if (!navigator.geolocation) {
-      setLoading(false)
-      return
-    }
+    setUserLocation(MADRID_DEFAULT)
+
+    if (!navigator.geolocation) return
+
     navigator.geolocation.getCurrentPosition(
       (pos) => {
-        setLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude })
-        setLoading(false)
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude })
       },
-      () => setLoading(false),
+      () => {},
       { timeout: 5000 }
     )
-  }, [])
-
-  return { location, loading }
+  }, [setUserLocation])
 }

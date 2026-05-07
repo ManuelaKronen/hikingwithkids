@@ -6,6 +6,12 @@ import MapViewPage from './pages/MapView'
 import TrailDetail from './pages/TrailDetail'
 import Saved from './pages/Saved'
 import Profile from './pages/Profile'
+import { useLocation } from './hooks/useLocation'
+
+function LocationInit() {
+  useLocation()
+  return null
+}
 
 function DesktopTopNav() {
   const cls = ({ isActive }: { isActive: boolean }) =>
@@ -33,6 +39,7 @@ function DesktopTopNav() {
 export default function App() {
   return (
     <BrowserRouter>
+      <LocationInit />
       <div className="flex" style={{ height: '100dvh' }}>
         {/* Left panel — sidebar on desktop, full width on mobile */}
         <div className="flex flex-col w-full md:w-[400px] md:shrink-0 md:border-r md:border-gray-200 overflow-hidden">

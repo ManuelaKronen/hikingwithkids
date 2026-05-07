@@ -36,6 +36,11 @@ function applyFilter(trails: Trail[], filter: FilterType): Trail[] {
   }
 }
 
+export interface UserLocation {
+  lat: number
+  lng: number
+}
+
 interface AppState {
   trails: Trail[]
   filteredTrails: Trail[]
@@ -43,6 +48,7 @@ interface AppState {
   savedTrailIds: string[]
   userProfile: UserProfile
   selectedTrail: Trail | null
+  userLocation: UserLocation | null
 
   setFilter: (filter: FilterType) => void
   toggleSaved: (trailId: string) => void
@@ -51,6 +57,7 @@ interface AppState {
   updateProfile: (updates: Partial<UserProfile>) => void
   addKid: (kid: { name: string; age: number }) => void
   markCompleted: (trailId: string) => void
+  setUserLocation: (loc: UserLocation) => void
 }
 
 export const useAppStore = create<AppState>()(
@@ -62,6 +69,7 @@ export const useAppStore = create<AppState>()(
       savedTrailIds: [],
       userProfile: defaultProfile,
       selectedTrail: null,
+      userLocation: null,
 
       setFilter: (filter) =>
         set((state) => ({
@@ -110,6 +118,8 @@ export const useAppStore = create<AppState>()(
             },
           }
         }),
+
+      setUserLocation: (loc) => set({ userLocation: loc }),
     }),
     {
       name: 'hiking-with-kids-storage',

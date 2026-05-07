@@ -46,6 +46,70 @@ export function initMap(
   return new MapView({ container, map, zoom: 11, center, ui: { components: [] } })
 }
 
+const USER_LAYER_ID = 'user-location'
+const ROUTE_LAYER_ID = 'route-indicator'
+
+export function updateUserLocationOnMap(view: __esri.MapView, lat: number, lng: number) {
+  if (!view.map) return
+  let layer = view.map.findLayerById(USER_LAYER_ID) as GraphicsLayer | undefined
+  if (!layer) {
+    layer = new GraphicsLayer({ id: USER_LAYER_ID })
+    view.map.add(layer)
+  }
+  layer.removeAll()
+  const point = new Point({ longitude: lng, latitude: lat })
+  layer.addMany([
+    new Graphic({
+      geometry: point,
+      symbol: new SimpleMarkerSymbol({
+        color: [66, 133, 244, 35],
+        size: 26,
+        outline: { color: [66, 133, 244, 130], width: 2 },
+      }),
+    }),
+    new Graphic({
+      geometry: point,
+      symbol: new SimpleMarkerSymbol({
+        color: [66, 133, 244, 255],
+        size: 10,
+        outline: { color: [255, 255, 255, 255], width: 2 },
+      }),
+    }),
+  ])
+}
+
+export function drawRouteIndicator(
+  view: __esri.MapView,
+  userLat: number,
+  userLng: number,
+  trailLat: number,
+  trailLng: number
+) {
+  if (!view.map) return
+  let layer = view.map.findLayerById(ROUTE_LAYER_ID) as GraphicsLayer | undefined
+  if (!layer) {
+    layer = new GraphicsLayer({ id: ROUTE_LAYER_ID })
+    view.map.add(layer)
+  }
+  layer.removeAll()
+  const line = new Polyline({
+    paths: [[[userLng, userLat], [trailLng, trailLat]]],
+    spatialReference: { wkid: 4326 },
+  })
+  layer.add(
+    new Graphic({
+      geometry: line,
+      symbol: new SimpleLineSymbol({ color: [66, 133, 244, 180], width: 2.5, style: 'dash' }),
+    })
+  )
+}
+
+export function clearRouteIndicator(view: __esri.MapView) {
+  if (!view.map) return
+  const layer = view.map.findLayerById(ROUTE_LAYER_ID) as GraphicsLayer | undefined
+  if (layer) layer.removeAll()
+}
+
 export function initMiniMap(container: HTMLDivElement, trail: Trail): __esri.MapView {
   setupEsri()
   const routeLayer = new GraphicsLayer()
