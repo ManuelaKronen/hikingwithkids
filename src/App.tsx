@@ -38,7 +38,7 @@ function DesktopTopNav() {
         <div className="w-8 h-8 rounded-full bg-[#F8F0E3] flex items-center justify-center text-base shrink-0">
           🥾
         </div>
-        <span className="font-bold text-[#F8F0E3] uppercase tracking-wide">Hiking with Kids</span>
+        <span className="font-bold text-[#F8F0E3] text-lg uppercase tracking-wide">Hiking with Kids</span>
       </div>
       {onDetailPage && (
         <button
