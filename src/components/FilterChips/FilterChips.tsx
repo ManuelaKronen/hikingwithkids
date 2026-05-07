@@ -42,7 +42,7 @@ function Tag({
       } ${
         isActive
           ? `${activeClass} border-transparent font-semibold shadow-sm`
-          : 'bg-[#8B6040] md:bg-surface border-[#A07050] md:border-gray-200 text-[#F8F0E3] md:text-gray-500 font-medium'
+          : 'bg-[#8B6040] border-[#A07050] text-[#F8F0E3] font-medium'
       }`}
     >
       {label}

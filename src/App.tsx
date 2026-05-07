@@ -33,12 +33,12 @@ function DesktopTopNav() {
   const onDetailPage = useMatch('/trail/:id')
 
   return (
-    <div className="hidden md:flex items-center px-4 py-3 border-b border-gray-200 bg-surface shrink-0">
-      <span className="font-bold text-gray-900 flex-1">Hiking with Kids</span>
+    <div className="hidden md:flex items-center px-4 py-3 border-b border-[#5A3A1A] bg-[#7A5230] shrink-0">
+      <span className="font-bold text-[#F8F0E3] flex-1">Hiking with Kids</span>
       {onDetailPage && (
         <button
           onClick={() => navigate(-1)}
-          className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 transition-colors"
+          className="flex items-center gap-1 text-sm text-[#C4A882] hover:text-[#F8F0E3] transition-colors"
         >
           <ArrowLeft size={15} strokeWidth={2} />
           Back to list

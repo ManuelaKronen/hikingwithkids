@@ -33,7 +33,7 @@ export default function Explore() {
   return (
     <div className="h-full flex flex-col overflow-hidden">
       {/* Sticky header */}
-      <div className="shrink-0 bg-[#7A5230] md:bg-surface px-4 pt-3 pb-3 md:border-b md:border-gray-100">
+      <div className="shrink-0 bg-[#7A5230] px-4 pt-3 pb-3 border-b border-[#5A3A1A]">
 
         <p className="font-bold text-[#F8F0E3] text-lg mb-3 md:hidden">Hiking with Kids</p>
 
@@ -41,7 +41,7 @@ export default function Explore() {
         <div className="relative">
           <Search
             size={17}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C4A882] md:text-gray-400"
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-[#C4A882]"
             strokeWidth={2}
           />
           <input
@@ -49,7 +49,7 @@ export default function Explore() {
             placeholder="Search trail by name"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 bg-[#8B6040] md:bg-surface-secondary rounded-xl text-sm text-[#F8F0E3] md:text-gray-900 placeholder:text-[#C4A882] md:placeholder:text-gray-400 border border-[#A07050] md:border-gray-200 outline-none focus:border-[#F8F0E3] md:focus:border-primary transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 bg-[#8B6040] rounded-xl text-sm text-[#F8F0E3] placeholder:text-[#C4A882] border border-[#A07050] outline-none focus:border-[#F8F0E3] transition-colors"
           />
         </div>
 
