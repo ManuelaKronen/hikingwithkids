@@ -54,19 +54,32 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
           </p>
         )}
         <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-          <span
-            className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty] ?? 'bg-gray-100 text-gray-600'}`}
-          >
+          <span className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty] ?? 'bg-gray-100 text-gray-600'}`}>
             {DIFFICULTY_LABEL[trail.difficulty] ?? trail.difficulty}
           </span>
+          {trail.kidFeatures.minRecommendedAge && (
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-age text-age-text">
+              👶 {trail.kidFeatures.minRecommendedAge}+
+            </span>
+          )}
           {trail.kidFeatures.strollerFriendly && (
             <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-primary-mid text-teal-800">
               🚼 Stroller
             </span>
           )}
-          {trail.kidFeatures.minRecommendedAge && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-age text-age-text">
-              👶 {trail.kidFeatures.minRecommendedAge}+
+          {trail.kidFeatures.playground && (
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">
+              🛝 Playground
+            </span>
+          )}
+          {trail.kidFeatures.waterFountain && (
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
+              💧 Water
+            </span>
+          )}
+          {trail.kidFeatures.picnicArea && (
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800">
+              🧺 Picnic
             </span>
           )}
         </div>
