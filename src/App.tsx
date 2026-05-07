@@ -28,7 +28,11 @@ function TrailsInit() {
 }
 
 function DesktopTopNav() {
-  return <div className="hidden md:block h-px bg-gray-200 shrink-0" />
+  return (
+    <div className="hidden md:flex items-center gap-2 px-4 py-3 border-b border-gray-200 bg-white shrink-0">
+      <span className="font-bold text-gray-900">Hiking with Kids</span>
+    </div>
+  )
 }
 
 export default function App() {
