@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAppStore } from '../store/useAppStore'
 import {
   initMap,
@@ -14,11 +15,26 @@ import type { Trail } from '../types/trail'
 export default function MapViewPage() {
   const mapRef = useRef<HTMLDivElement>(null)
   const viewRef = useRef<__esri.MapView | null>(null)
+  const navigate = useNavigate()
   const trails = useAppStore((s) => s.trails)
   const selectedTrail = useAppStore((s) => s.selectedTrail)
+  const selectedTrailRef = useRef(selectedTrail)
+  selectedTrailRef.current = selectedTrail
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const userLocation = useAppStore((s) => s.userLocation)
   const locationFocusCount = useAppStore((s) => s.locationFocusCount)
+
+  // Redirect to desktop layout when window is resized to desktop width
+  useEffect(() => {
+    const redirect = () => {
+      if (window.innerWidth >= 768) {
+        navigate(selectedTrailRef.current ? `/trail/${selectedTrailRef.current.id}` : '/', { replace: true })
+      }
+    }
+    redirect()
+    window.addEventListener('resize', redirect)
+    return () => window.removeEventListener('resize', redirect)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Initialize map once
   useEffect(() => {
