@@ -3,6 +3,7 @@ import { Search } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import FilterChips from '../components/FilterChips/FilterChips'
 import TrailCard from '../components/TrailCard/TrailCard'
+import NavBar from '../components/NavBar/NavBar'
 import { haversineKm } from '../utils/geo'
 
 export default function Explore() {
@@ -82,6 +83,7 @@ export default function Explore() {
           </div>
         )}
       </div>
+      <NavBar />
     </div>
   )
 }

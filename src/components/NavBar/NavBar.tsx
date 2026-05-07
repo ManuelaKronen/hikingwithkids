@@ -1,33 +1,19 @@
 import { NavLink } from 'react-router-dom'
-import { Compass, Map } from 'lucide-react'
-
-const navItems = [
-  { icon: Compass, label: 'Explore', path: '/' },
-  { icon: Map, label: 'Map', path: '/map' },
-]
 
 export default function NavBar() {
+  const cls = ({ isActive }: { isActive: boolean }) =>
+    `flex-1 py-2.5 text-center text-sm font-semibold rounded-xl transition-colors ${
+      isActive ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
+    }`
+
   return (
     <nav
-      className="md:hidden shrink-0 bg-white border-t border-gray-200"
+      className="md:hidden shrink-0 bg-white border-t border-gray-100 px-3 py-2"
       style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
-      <div className="flex">
-        {navItems.map(({ icon: Icon, label, path }) => (
-          <NavLink
-            key={path}
-            to={path}
-            end={path === '/'}
-            className={({ isActive }) =>
-              `flex-1 flex flex-col items-center py-2 gap-0.5 text-[10px] font-medium transition-colors ${
-                isActive ? 'text-primary' : 'text-label-tertiary'
-              }`
-            }
-          >
-            <Icon size={22} strokeWidth={1.8} />
-            <span>{label}</span>
-          </NavLink>
-        ))}
+      <div className="flex gap-2">
+        <NavLink to="/" end className={cls}>Explore</NavLink>
+        <NavLink to="/map" className={cls}>Map</NavLink>
       </div>
     </nav>
   )

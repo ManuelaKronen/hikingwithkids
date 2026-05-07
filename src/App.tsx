@@ -51,7 +51,6 @@ export default function App() {
               <Route path="/trail/:id" element={<TrailDetail />} />
             </Routes>
           </div>
-          <NavBar />
         </div>
 
         {/* Right panel — persistent map, desktop only */}

@@ -9,6 +9,7 @@ import {
   flyToTrail,
 } from '../utils/arcgis'
 import BottomSheet from '../components/BottomSheet/BottomSheet'
+import NavBar from '../components/NavBar/NavBar'
 import type { Trail } from '../types/trail'
 
 export default function MapViewPage() {
@@ -88,7 +89,10 @@ export default function MapViewPage() {
 
       <div ref={mapRef} className="flex-1 relative" />
 
-      <BottomSheet selectedTrail={selectedTrail} onClear={() => setSelectedTrail(null)} />
+      {selectedTrail && (
+        <BottomSheet selectedTrail={selectedTrail} onClear={() => setSelectedTrail(null)} />
+      )}
+      <NavBar />
     </div>
   )
 }
