@@ -1,12 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import { Heart } from 'lucide-react'
 import { Trail } from '../../types/trail'
 import { formatDistanceFromUser } from '../../utils/geo'
 
 interface Props {
   trail: Trail
-  isSaved: boolean
-  onToggleSaved: () => void
   distanceFromUser?: number
 }
 
@@ -28,7 +25,7 @@ const DIFFICULTY_CLASSES: Record<string, string> = {
   hard: 'bg-red-100 text-red-800',
 }
 
-export default function TrailCard({ trail, isSaved, onToggleSaved, distanceFromUser }: Props) {
+export default function TrailCard({ trail, distanceFromUser }: Props) {
   const navigate = useNavigate()
 
   return (
@@ -75,21 +72,6 @@ export default function TrailCard({ trail, isSaved, onToggleSaved, distanceFromU
         </div>
       </div>
 
-      {/* Heart */}
-      <button
-        className="shrink-0 p-1.5"
-        onClick={(e) => {
-          e.stopPropagation()
-          onToggleSaved()
-        }}
-      >
-        <Heart
-          size={20}
-          fill={isSaved ? '#D85A30' : 'none'}
-          stroke={isSaved ? '#D85A30' : '#9e9e96'}
-          strokeWidth={1.8}
-        />
-      </button>
     </div>
   )
 }

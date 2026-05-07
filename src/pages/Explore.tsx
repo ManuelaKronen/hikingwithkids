@@ -7,8 +7,6 @@ import { haversineKm } from '../utils/geo'
 
 export default function Explore() {
   const filteredTrails = useAppStore((s) => s.filteredTrails)
-  const savedTrailIds = useAppStore((s) => s.savedTrailIds)
-  const toggleSaved = useAppStore((s) => s.toggleSaved)
   const activeFilter = useAppStore((s) => s.activeFilter)
   const setFilter = useAppStore((s) => s.setFilter)
   const userLocation = useAppStore((s) => s.userLocation)
@@ -81,8 +79,6 @@ export default function Explore() {
               <TrailCard
                 key={trail.id}
                 trail={trail}
-                isSaved={savedTrailIds.includes(trail.id)}
-                onToggleSaved={() => toggleSaved(trail.id)}
                 distanceFromUser={
                   userLocation
                     ? haversineKm(userLocation.lat, userLocation.lng, trail.lat, trail.lng)

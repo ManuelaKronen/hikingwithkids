@@ -6,7 +6,6 @@ import TrailCard from '../components/TrailCard/TrailCard'
 export default function Saved() {
   const allTrails = useAppStore((s) => s.trails)
   const savedTrailIds = useAppStore((s) => s.savedTrailIds)
-  const toggleSaved = useAppStore((s) => s.toggleSaved)
   const navigate = useNavigate()
 
   const savedTrails = allTrails.filter((t) => savedTrailIds.includes(t.id))
@@ -45,12 +44,7 @@ export default function Saved() {
             </p>
             <div className="space-y-3">
               {savedTrails.map((trail) => (
-                <TrailCard
-                  key={trail.id}
-                  trail={trail}
-                  isSaved={true}
-                  onToggleSaved={() => toggleSaved(trail.id)}
-                />
+                <TrailCard key={trail.id} trail={trail} />
               ))}
             </div>
           </>

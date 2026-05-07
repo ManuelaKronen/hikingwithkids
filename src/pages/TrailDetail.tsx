@@ -24,11 +24,7 @@ export default function TrailDetail() {
   const viewRef = useRef<__esri.MapView | null>(null)
 
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
-  const savedTrailIds = useAppStore((s) => s.savedTrailIds)
-  const toggleSaved = useAppStore((s) => s.toggleSaved)
   const markCompleted = useAppStore((s) => s.markCompleted)
-
-  const isSaved = trail ? savedTrailIds.includes(trail.id) : false
 
   useEffect(() => {
     if (!miniMapRef.current || viewRef.current || !trail) return
@@ -62,9 +58,6 @@ export default function TrailDetail() {
           <ArrowLeft size={22} strokeWidth={2} className="text-gray-700" />
         </button>
         <h1 className="flex-1 font-semibold text-gray-900 truncate">{trail.name}</h1>
-        <button onClick={() => toggleSaved(trail.id)} className="p-0.5">
-          <span className="text-lg">{isSaved ? '❤️' : '🤍'}</span>
-        </button>
         <button className="p-0.5">
           <Share2 size={20} strokeWidth={1.8} className="text-gray-500" />
         </button>

@@ -1,4 +1,4 @@
-import { NavLink, BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NavBar from './components/NavBar/NavBar'
 import DesktopMap from './components/DesktopMap/DesktopMap'
 import Explore from './pages/Explore'
@@ -28,18 +28,10 @@ function TrailsInit() {
 }
 
 function DesktopTopNav() {
-  const cls = ({ isActive }: { isActive: boolean }) =>
-    `text-sm font-medium px-3 py-1.5 rounded-lg transition-colors ${
-      isActive ? 'bg-primary-light text-primary' : 'text-gray-500 hover:text-gray-900'
-    }`
-
   return (
-    <div className="hidden md:flex items-center gap-1 px-4 py-3 border-b border-gray-200 bg-white shrink-0">
-      <span className="text-lg mr-1">🏔</span>
-      <span className="font-bold text-gray-900 flex-1">Hiking with Kids</span>
-      <NavLink to="/" end className={cls}>
-        Explore
-      </NavLink>
+    <div className="hidden md:flex items-center gap-2 px-4 py-3 border-b border-gray-200 bg-white shrink-0">
+      <span className="text-lg">🏔</span>
+      <span className="font-bold text-gray-900">Hiking with Kids</span>
     </div>
   )
 }

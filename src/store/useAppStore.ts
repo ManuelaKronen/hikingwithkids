@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 import { Trail, UserProfile, Difficulty } from '../types/trail'
 import { mockTrails } from '../data/mockTrails'
 
-export type FilterType = 'all' | 'easy' | 'moderate' | 'stroller' | 'dog'
+export type FilterType = 'all' | 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic' | 'dog'
 
 const defaultProfile: UserProfile = {
   displayName: 'Lucía',
@@ -23,16 +23,15 @@ const defaultProfile: UserProfile = {
 
 function applyFilter(trails: Trail[], filter: FilterType): Trail[] {
   switch (filter) {
-    case 'easy':
-      return trails.filter((t) => t.difficulty === 'easy')
-    case 'moderate':
-      return trails.filter((t) => t.difficulty === 'moderate')
-    case 'stroller':
-      return trails.filter((t) => t.kidFeatures.strollerFriendly)
-    case 'dog':
-      return trails.filter((t) => t.kidFeatures.dogFriendly)
-    default:
-      return trails
+    case 'easy':       return trails.filter((t) => t.difficulty === 'easy')
+    case 'moderate':   return trails.filter((t) => t.difficulty === 'moderate')
+    case 'hard':       return trails.filter((t) => t.difficulty === 'hard')
+    case 'stroller':   return trails.filter((t) => t.kidFeatures.strollerFriendly)
+    case 'playground': return trails.filter((t) => t.kidFeatures.playground)
+    case 'water':      return trails.filter((t) => t.kidFeatures.waterFountain)
+    case 'picnic':     return trails.filter((t) => t.kidFeatures.picnicArea)
+    case 'dog':        return trails.filter((t) => t.kidFeatures.dogFriendly)
+    default:           return trails
   }
 }
 
