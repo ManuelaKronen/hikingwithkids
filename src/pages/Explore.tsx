@@ -1,0 +1,82 @@
+import { useState } from 'react'
+import { Bell, Search } from 'lucide-react'
+import { useAppStore } from '../store/useAppStore'
+import FilterChips from '../components/FilterChips/FilterChips'
+import TrailCard from '../components/TrailCard/TrailCard'
+
+export default function Explore() {
+  const filteredTrails = useAppStore((s) => s.filteredTrails)
+  const savedTrailIds = useAppStore((s) => s.savedTrailIds)
+  const toggleSaved = useAppStore((s) => s.toggleSaved)
+  const activeFilter = useAppStore((s) => s.activeFilter)
+  const setFilter = useAppStore((s) => s.setFilter)
+  const [query, setQuery] = useState('')
+
+  const displayed = query
+    ? filteredTrails.filter(
+        (t) =>
+          t.name.toLowerCase().includes(query.toLowerCase()) ||
+          t.location.toLowerCase().includes(query.toLowerCase())
+      )
+    : filteredTrails
+
+  return (
+    <div className="pb-20 min-h-full">
+      {/* Sticky header */}
+      <div className="sticky top-0 z-10 bg-surface px-4 pt-4 pb-2 border-b border-gray-100">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <span className="text-xl">🏔</span>
+            <span className="font-bold text-gray-900 text-lg">Hiking with Kids</span>
+          </div>
+          <button className="p-1">
+            <Bell size={22} strokeWidth={1.8} className="text-gray-500" />
+          </button>
+        </div>
+
+        {/* Search */}
+        <div className="relative">
+          <Search
+            size={17}
+            className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+            strokeWidth={2}
+          />
+          <input
+            type="text"
+            placeholder="Buscar rutas cerca de ti…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="w-full pl-9 pr-4 py-2.5 bg-gray-50 rounded-xl text-sm border border-gray-200 outline-none focus:border-primary transition-colors"
+          />
+        </div>
+
+        <FilterChips activeFilter={activeFilter} onFilterChange={setFilter} />
+      </div>
+
+      {/* Trail list */}
+      <div className="px-4 pt-4">
+        <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+          Rutas cercanas · {displayed.length} resultados
+        </p>
+        {displayed.length === 0 ? (
+          <div className="text-center py-16 text-gray-400">
+            <p className="text-4xl mb-3">🔍</p>
+            <p className="font-medium">No se encontraron rutas</p>
+            <p className="text-sm mt-1">Prueba con otro filtro o búsqueda</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {displayed.map((trail) => (
+              <TrailCard
+                key={trail.id}
+                trail={trail}
+                isSaved={savedTrailIds.includes(trail.id)}
+                onToggleSaved={() => toggleSaved(trail.id)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
