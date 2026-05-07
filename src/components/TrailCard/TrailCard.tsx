@@ -63,24 +63,16 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
             </span>
           )}
           {trail.kidFeatures.strollerFriendly && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-primary-mid text-teal-800">
-              🚼 Stroller
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🚼 Stroller</span>
           )}
           {trail.kidFeatures.playground && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-purple-100 text-purple-800">
-              🛝 Playground
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🛝 Playground</span>
           )}
           {trail.kidFeatures.waterFountain && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-blue-100 text-blue-800">
-              💧 Water
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">💧 Water</span>
           )}
           {trail.kidFeatures.picnicArea && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-yellow-100 text-yellow-800">
-              🧺 Picnic
-            </span>
+            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🧺 Picnic</span>
           )}
         </div>
       </div>

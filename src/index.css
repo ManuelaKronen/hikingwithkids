@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2D6A4F;
-  --color-primary-light: #E4EFE8;
-  --color-primary-mid: #8DB89E;
+  --color-primary: #5BAE8A;
+  --color-primary-light: #EBF5F0;
+  --color-primary-mid: #B8DECE;
 
-  --color-easy: #A8C5A0;
-  --color-easy-text: #2D5A27;
-  --color-moderate: #E8B86D;
-  --color-moderate-text: #7A4510;
-  --color-hard: #D4896A;
-  --color-hard-text: #6B2D1A;
-  --color-age: #B5D4F4;
+  --color-easy: #D0E8C4;
+  --color-easy-text: #386630;
+  --color-moderate: #FFE5A8;
+  --color-moderate-text: #875810;
+  --color-hard: #FBCFBB;
+  --color-hard-text: #8A3620;
+  --color-kid: #E0EDE6;
+  --color-kid-text: #2D5A3D;
+  --color-age: #D4E8FA;
   --color-age-text: #185FA5;
   --color-heart: #D85A30;
 
-  --color-surface: #FDFAF6;
-  --color-surface-secondary: #F4EDE4;
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F4F0E6;
   --color-label: #1a1a1a;
   --color-label-secondary: #666660;
   --color-label-tertiary: #9e9e96;
@@ -35,8 +37,8 @@ body,
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #F4EDE4;
+  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #F4F0E6;
   color: #1a1a1a;
 }
 

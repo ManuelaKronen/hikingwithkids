@@ -12,30 +12,10 @@ const MD = 'text-xs px-2.5 py-1'
 export default function KidBadges({ features, size = 'sm' }: Props) {
   const cls = `${BASE} ${size === 'sm' ? SM : MD}`
   const badges: { show: boolean; emoji: string; label: string; style: string }[] = [
-    {
-      show: features.strollerFriendly,
-      emoji: '🚼',
-      label: 'Stroller',
-      style: 'bg-primary-mid text-teal-800',
-    },
-    {
-      show: features.playground,
-      emoji: '🛝',
-      label: 'Playground',
-      style: 'bg-purple-100 text-purple-800',
-    },
-    {
-      show: features.waterFountain,
-      emoji: '💧',
-      label: 'Water',
-      style: 'bg-blue-100 text-blue-800',
-    },
-    {
-      show: features.picnicArea,
-      emoji: '🧺',
-      label: 'Picnic',
-      style: 'bg-yellow-100 text-yellow-800',
-    },
+    { show: features.strollerFriendly, emoji: '🚼', label: 'Stroller',   style: 'bg-kid text-kid-text' },
+    { show: features.playground,       emoji: '🛝', label: 'Playground', style: 'bg-kid text-kid-text' },
+    { show: features.waterFountain,    emoji: '💧', label: 'Water',      style: 'bg-kid text-kid-text' },
+    { show: features.picnicArea,       emoji: '🧺', label: 'Picnic',     style: 'bg-kid text-kid-text' },
   ]
 
   return (

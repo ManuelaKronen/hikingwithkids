@@ -12,10 +12,10 @@ const difficultyTags: { id: FilterType; label: string; activeClass: string }[] =
 ]
 
 const kidTags: { id: FilterType; label: string; activeClass: string }[] = [
-  { id: 'stroller',   label: '🚼 Stroller',   activeClass: 'bg-primary-mid text-teal-800'  },
-  { id: 'playground', label: '🛝 Playground', activeClass: 'bg-purple-100 text-purple-800' },
-  { id: 'water',      label: '💧 Water',      activeClass: 'bg-blue-100 text-blue-800'     },
-  { id: 'picnic',     label: '🧺 Picnic',     activeClass: 'bg-yellow-100 text-yellow-800' },
+  { id: 'stroller',   label: '🚼 Stroller',   activeClass: 'bg-kid text-kid-text' },
+  { id: 'playground', label: '🛝 Playground', activeClass: 'bg-kid text-kid-text' },
+  { id: 'water',      label: '💧 Water',      activeClass: 'bg-kid text-kid-text' },
+  { id: 'picnic',     label: '🧺 Picnic',     activeClass: 'bg-kid text-kid-text' },
 ]
 
 function Tag({
