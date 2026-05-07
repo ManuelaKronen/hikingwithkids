@@ -114,21 +114,19 @@ export default function TrailDetail() {
       </div>
 
       {/* Sticky CTA — desktop only, mobile uses map view buttons */}
-      <div className="hidden md:block shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100">
-        <div className="bg-surface rounded-2xl shadow-sm p-3 flex flex-col gap-2">
-          <button
-            onClick={requestLocationFocus}
-            className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
-          >
-            Show my location
-          </button>
-          <button
-            onClick={handleStart}
-            className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
-          >
-            Directions to trailhead
-          </button>
-        </div>
+      <div className="hidden md:flex shrink-0 flex-col gap-2 px-4 py-3 border-t border-gray-100">
+        <button
+          onClick={requestLocationFocus}
+          className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
+        >
+          Show my location
+        </button>
+        <button
+          onClick={handleStart}
+          className="w-full py-3 rounded-xl bg-[#7A5230] text-white font-semibold text-[15px]"
+        >
+          Directions to trailhead
+        </button>
       </div>
       <NavBar />
     </div>
