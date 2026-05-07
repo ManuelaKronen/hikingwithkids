@@ -5,30 +5,41 @@ interface Props {
   onToggleFilter: (filter: FilterType) => void
 }
 
-const difficultyTags: { id: FilterType; label: string; activeClass: string }[] = [
-  { id: 'easy',     label: '🟢 Easy',     activeClass: 'bg-easy text-easy-text'         },
-  { id: 'moderate', label: '🟡 Moderate', activeClass: 'bg-moderate text-moderate-text' },
-  { id: 'hard',     label: '🔴 Hard',     activeClass: 'bg-hard text-hard-text'          },
+const allTags: { id: FilterType; label: string; size: 'md' | 'sm' }[] = [
+  { id: 'easy',       label: '🟢 Easy',       size: 'md' },
+  { id: 'moderate',   label: '🟡 Moderate',   size: 'md' },
+  { id: 'hard',       label: '🔴 Hard',       size: 'md' },
+  { id: 'stroller',   label: '🚼 Stroller',   size: 'sm' },
+  { id: 'playground', label: '🛝 Playground', size: 'sm' },
+  { id: 'water',      label: '💧 Water',      size: 'sm' },
+  { id: 'picnic',     label: '🧺 Picnic',     size: 'sm' },
 ]
 
-const kidTags: { id: FilterType; label: string; activeClass: string }[] = [
-  { id: 'stroller',   label: '🚼 Stroller',   activeClass: 'bg-kid text-kid-text' },
-  { id: 'playground', label: '🛝 Playground', activeClass: 'bg-kid text-kid-text' },
-  { id: 'water',      label: '💧 Water',      activeClass: 'bg-kid text-kid-text' },
-  { id: 'picnic',     label: '🧺 Picnic',     activeClass: 'bg-kid text-kid-text' },
-]
+const difficultyIds = new Set(['easy', 'moderate', 'hard'])
 
-function Tag({
-  id,
-  label,
-  activeClass,
-  size,
-  activeFilters,
-  onToggleFilter,
-}: {
+export default function FilterChips({ activeFilters, onToggleFilter }: Props) {
+  const difficulty = allTags.filter((t) => difficultyIds.has(t.id))
+  const kids = allTags.filter((t) => !difficultyIds.has(t.id))
+
+  return (
+    <div className="flex flex-col gap-2 mt-3">
+      <div className="flex gap-1.5">
+        {difficulty.map(({ id, label, size }) => (
+          <Chip key={id} id={id} label={label} size={size} activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
+        ))}
+      </div>
+      <div className="flex flex-wrap gap-1.5">
+        {kids.map(({ id, label, size }) => (
+          <Chip key={id} id={id} label={label} size={size} activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function Chip({ id, label, size, activeFilters, onToggleFilter }: {
   id: FilterType
   label: string
-  activeClass: string
   size: 'md' | 'sm'
   activeFilters: FilterType[]
   onToggleFilter: (f: FilterType) => void
@@ -41,28 +52,11 @@ function Tag({
         size === 'md' ? 'text-sm px-3 py-1.5' : 'text-[11px] px-2.5 py-1'
       } ${
         isActive
-          ? `${activeClass} border-transparent font-semibold shadow-sm`
-          : 'bg-[#8B6040] border-[#A07050] text-[#F8F0E3] font-medium'
+          ? 'bg-[#C4975A] text-[#3A1F08] border-transparent font-semibold shadow-sm'
+          : 'bg-[#E2CEAE] text-[#5A3A1A] border-[#C8A878] font-medium'
       }`}
     >
       {label}
     </button>
-  )
-}
-
-export default function FilterChips({ activeFilters, onToggleFilter }: Props) {
-  return (
-    <div className="flex flex-col gap-2 mt-3">
-      <div className="flex gap-1.5">
-        {difficultyTags.map((t) => (
-          <Tag key={t.id} {...t} size="md" activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
-        ))}
-      </div>
-      <div className="flex flex-wrap gap-1.5">
-        {kidTags.map((t) => (
-          <Tag key={t.id} {...t} size="sm" activeFilters={activeFilters} onToggleFilter={onToggleFilter} />
-        ))}
-      </div>
-    </div>
   )
 }
