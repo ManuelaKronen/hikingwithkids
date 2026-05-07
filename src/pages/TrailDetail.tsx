@@ -144,21 +144,23 @@ export default function TrailDetail() {
 
       {/* Sticky CTA */}
       <div
-        className="shrink-0 px-4 py-3 bg-white border-t border-gray-100"
+        className="shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100"
         style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)' }}
       >
-        <button
-          onClick={requestLocationFocus}
-          className="w-full py-3 rounded-2xl border border-primary text-primary font-semibold text-[15px] mb-2"
-        >
-          Show my location
-        </button>
-        <button
-          onClick={handleStart}
-          className="w-full py-3.5 rounded-2xl bg-primary text-white font-semibold text-[15px]"
-        >
-          Directions to trailhead
-        </button>
+        <div className="bg-white rounded-2xl shadow-sm p-3 flex flex-col gap-2">
+          <button
+            onClick={requestLocationFocus}
+            className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-[15px]"
+          >
+            Show my location
+          </button>
+          <button
+            onClick={handleStart}
+            className="w-full py-3 rounded-xl bg-primary text-white font-semibold text-[15px]"
+          >
+            Directions to trailhead
+          </button>
+        </div>
       </div>
     </div>
   )
