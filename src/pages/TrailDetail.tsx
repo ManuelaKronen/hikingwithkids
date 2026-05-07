@@ -24,7 +24,14 @@ export default function TrailDetail() {
   const viewRef = useRef<__esri.MapView | null>(null)
 
   const trail = useAppStore((s) => s.trails.find((t) => t.id === id))
+  const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const markCompleted = useAppStore((s) => s.markCompleted)
+
+  // Keep selected trail in sync so the desktop map zooms to it
+  useEffect(() => {
+    if (trail) setSelectedTrail(trail)
+    return () => setSelectedTrail(null)
+  }, [trail?.id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (!miniMapRef.current || viewRef.current || !trail) return

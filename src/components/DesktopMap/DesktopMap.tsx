@@ -70,15 +70,17 @@ export default function DesktopMap() {
   useEffect(() => {
     if (!viewRef.current) return
     viewRef.current.when(() => {
-      if (selectedTrail && userLocation) {
+      if (selectedTrail) {
         flyToTrail(viewRef.current!, selectedTrail)
-        drawRouteIndicator(
-          viewRef.current!,
-          userLocation.lat,
-          userLocation.lng,
-          selectedTrail.lat,
-          selectedTrail.lng
-        )
+        if (userLocation) {
+          drawRouteIndicator(
+            viewRef.current!,
+            userLocation.lat,
+            userLocation.lng,
+            selectedTrail.lat,
+            selectedTrail.lng
+          )
+        }
       } else {
         clearRouteIndicator(viewRef.current!)
       }
