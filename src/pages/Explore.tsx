@@ -59,7 +59,7 @@ export default function Explore() {
       {/* Scrollable trail list */}
       <div className="flex-1 overflow-y-auto px-4 pt-4 pb-4">
         <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
-          Nearby trails · {displayed.length} results
+          Nearby trails · {displayed.length} {displayed.length === 1 ? 'result' : 'results'}
         </p>
         {displayed.length === 0 ? (
           <div className="text-center py-16 text-gray-400">
