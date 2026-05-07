@@ -6,9 +6,9 @@ import { initMiniMap } from '../utils/arcgis'
 import KidBadges from '../components/KidBadges/KidBadges'
 
 const DIFFICULTY_LABEL: Record<string, string> = {
-  easy: 'Fácil',
-  moderate: 'Moderado',
-  hard: 'Difícil',
+  easy: 'Easy',
+  moderate: 'Moderate',
+  hard: 'Hard',
 }
 
 const DIFFICULTY_CLASSES: Record<string, string> = {
@@ -43,7 +43,7 @@ export default function TrailDetail() {
   if (!trail) {
     return (
       <div className="h-full flex items-center justify-center text-gray-400">
-        <p>Ruta no encontrada</p>
+        <p>Trail not found</p>
       </div>
     )
   }
@@ -81,18 +81,18 @@ export default function TrailDetail() {
             <MapPin size={14} className="text-gray-400" strokeWidth={1.8} />
             <span className="text-sm text-gray-500">{trail.location}</span>
             <span className="text-gray-300 mx-1">·</span>
-            <span className="text-xs text-gray-400">Act. {trail.lastUpdated}</span>
+            <span className="text-xs text-gray-400">Updated {trail.lastUpdated}</span>
           </div>
 
           {/* Stats row */}
           <div className="grid grid-cols-4 gap-2 mb-5">
             {[
-              { icon: Ruler, label: 'Distancia', value: `${trail.distanceKm} km` },
-              { icon: Clock, label: 'Tiempo', value: `${trail.estimatedMinutes} min` },
-              { icon: TrendingUp, label: 'Desnivel', value: `${trail.elevationGainMeters} m` },
+              { icon: Ruler, label: 'Distance', value: `${trail.distanceKm} km` },
+              { icon: Clock, label: 'Time', value: `${trail.estimatedMinutes} min` },
+              { icon: TrendingUp, label: 'Elevation', value: `${trail.elevationGainMeters} m` },
               {
                 icon: () => <span className="text-base">🏔</span>,
-                label: 'Dificultad',
+                label: 'Difficulty',
                 value: DIFFICULTY_LABEL[trail.difficulty],
                 valueClass: DIFFICULTY_CLASSES[trail.difficulty],
               },
@@ -114,17 +114,17 @@ export default function TrailDetail() {
 
           {/* Kid features */}
           <section className="mb-5">
-            <h3 className="text-sm font-semibold text-gray-700 mb-2">Para los peques</h3>
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">Kid features</h3>
             <KidBadges features={trail.kidFeatures} size="md" />
           </section>
 
           {/* Photos placeholder */}
           <section className="mb-4">
-            <h3 className="text-sm font-semibold text-gray-700 mb-2">Fotos</h3>
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">Photos</h3>
             <div className="rounded-2xl bg-gradient-to-br from-green-50 to-teal-100 h-36 flex items-center justify-center text-gray-400">
               <div className="text-center">
                 <p className="text-3xl">📷</p>
-                <p className="text-xs mt-1">Fotos próximamente</p>
+                <p className="text-xs mt-1">Photos coming soon</p>
               </div>
             </div>
           </section>
@@ -140,7 +140,7 @@ export default function TrailDetail() {
           onClick={handleStart}
           className="w-full py-3.5 rounded-2xl bg-primary text-white font-semibold text-[15px]"
         >
-          🚀 Iniciar ruta
+          🚀 Start trail
         </button>
       </div>
     </div>

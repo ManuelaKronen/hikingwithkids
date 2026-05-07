@@ -4,8 +4,6 @@ import DesktopMap from './components/DesktopMap/DesktopMap'
 import Explore from './pages/Explore'
 import MapViewPage from './pages/MapView'
 import TrailDetail from './pages/TrailDetail'
-import Saved from './pages/Saved'
-import Profile from './pages/Profile'
 import { useLocation } from './hooks/useLocation'
 import { useEffect } from 'react'
 import { useAppStore } from './store/useAppStore'
@@ -40,13 +38,7 @@ function DesktopTopNav() {
       <span className="text-lg mr-1">🏔</span>
       <span className="font-bold text-gray-900 flex-1">Hiking with Kids</span>
       <NavLink to="/" end className={cls}>
-        Explorar
-      </NavLink>
-      <NavLink to="/saved" className={cls}>
-        Guardadas
-      </NavLink>
-      <NavLink to="/profile" className={cls}>
-        Perfil
+        Explore
       </NavLink>
     </div>
   )
@@ -66,8 +58,6 @@ export default function App() {
               <Route path="/" element={<Explore />} />
               <Route path="/map" element={<MapViewPage />} />
               <Route path="/trail/:id" element={<TrailDetail />} />
-              <Route path="/saved" element={<Saved />} />
-              <Route path="/profile" element={<Profile />} />
             </Routes>
           </div>
           <NavBar />

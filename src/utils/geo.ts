@@ -11,6 +11,6 @@ export function haversineKm(lat1: number, lng1: number, lat2: number, lng2: numb
 }
 
 export function formatDistanceFromUser(km: number): string {
-  if (km < 1) return `${Math.round(km * 1000)} m de aquí`
-  return `${km.toFixed(1)} km de aquí`
+  if (km < 1) return `${Math.round(km * 1000)} m away`
+  return `${km.toFixed(1)} km away`
 }

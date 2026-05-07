@@ -15,19 +15,19 @@ export default function KidBadges({ features, size = 'sm' }: Props) {
     {
       show: features.strollerFriendly,
       emoji: '🚼',
-      label: 'Carrito',
+      label: 'Stroller',
       style: 'bg-primary-mid text-teal-800',
     },
     {
       show: features.playground,
       emoji: '🛝',
-      label: 'Parque',
+      label: 'Playground',
       style: 'bg-purple-100 text-purple-800',
     },
     {
       show: features.waterFountain,
       emoji: '💧',
-      label: 'Agua',
+      label: 'Water',
       style: 'bg-blue-100 text-blue-800',
     },
     {
@@ -39,13 +39,13 @@ export default function KidBadges({ features, size = 'sm' }: Props) {
     {
       show: features.dogFriendly,
       emoji: '🐕',
-      label: 'Perros',
+      label: 'Dogs OK',
       style: 'bg-orange-100 text-orange-800',
     },
     {
       show: !!features.minRecommendedAge,
       emoji: '👶',
-      label: `+${features.minRecommendedAge} años`,
+      label: `${features.minRecommendedAge}+ yrs`,
       style: 'bg-age text-age-text',
     },
   ]

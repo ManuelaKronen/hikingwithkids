@@ -17,9 +17,9 @@ const GRADIENTS: Record<string, string> = {
 }
 
 const DIFFICULTY_LABEL: Record<string, string> = {
-  easy: 'Fácil',
-  moderate: 'Moderado',
-  hard: 'Difícil',
+  easy: 'Easy',
+  moderate: 'Moderate',
+  hard: 'Hard',
 }
 
 const DIFFICULTY_CLASSES: Record<string, string> = {
@@ -38,7 +38,7 @@ export default function TrailCard({ trail, isSaved, onToggleSaved, distanceFromU
     >
       {/* Thumbnail */}
       <div
-        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${GRADIENTS[trail.difficulty]} flex items-center justify-center shrink-0 text-2xl`}
+        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${GRADIENTS[trail.difficulty] ?? GRADIENTS.easy} flex items-center justify-center shrink-0 text-2xl`}
       >
         🏞
       </div>
@@ -58,18 +58,18 @@ export default function TrailCard({ trail, isSaved, onToggleSaved, distanceFromU
         )}
         <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
           <span
-            className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty]}`}
+            className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[trail.difficulty] ?? 'bg-gray-100 text-gray-600'}`}
           >
-            {DIFFICULTY_LABEL[trail.difficulty]}
+            {DIFFICULTY_LABEL[trail.difficulty] ?? trail.difficulty}
           </span>
           {trail.kidFeatures.strollerFriendly && (
             <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-primary-mid text-teal-800">
-              🚼 Carrito
+              🚼 Stroller
             </span>
           )}
           {trail.kidFeatures.minRecommendedAge && (
             <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-age text-age-text">
-              👶 +{trail.kidFeatures.minRecommendedAge}
+              👶 {trail.kidFeatures.minRecommendedAge}+
             </span>
           )}
         </div>

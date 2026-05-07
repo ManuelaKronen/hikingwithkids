@@ -1,11 +1,9 @@
 import { NavLink } from 'react-router-dom'
-import { Compass, Map, Bookmark, User } from 'lucide-react'
+import { Compass, Map } from 'lucide-react'
 
 const navItems = [
-  { icon: Compass, label: 'Explorar', path: '/' },
-  { icon: Map, label: 'Mapa', path: '/map' },
-  { icon: Bookmark, label: 'Guardadas', path: '/saved' },
-  { icon: User, label: 'Perfil', path: '/profile' },
+  { icon: Compass, label: 'Explore', path: '/' },
+  { icon: Map, label: 'Map', path: '/map' },
 ]
 
 export default function NavBar() {

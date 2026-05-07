@@ -94,7 +94,7 @@ export default function MapViewPage() {
         <button onClick={() => navigate(-1)} className="p-0.5">
           <ArrowLeft size={22} strokeWidth={2} className="text-gray-700" />
         </button>
-        <h1 className="flex-1 font-semibold text-gray-900">Mapa de rutas</h1>
+        <h1 className="flex-1 font-semibold text-gray-900">Trail map</h1>
       </div>
 
       <div ref={mapRef} className="flex-1 relative" />

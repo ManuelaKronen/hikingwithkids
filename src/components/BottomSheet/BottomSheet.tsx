@@ -8,9 +8,9 @@ interface Props {
 }
 
 const DIFFICULTY_LABEL: Record<string, string> = {
-  easy: 'Fácil',
-  moderate: 'Moderado',
-  hard: 'Difícil',
+  easy: 'Easy',
+  moderate: 'Moderate',
+  hard: 'Hard',
 }
 
 const DIFFICULTY_CLASSES: Record<string, string> = {
@@ -34,7 +34,6 @@ export default function BottomSheet({ selectedTrail, onClear }: Props) {
         boxShadow: '0 -4px 20px rgba(0,0,0,0.10)',
       }}
     >
-      {/* Drag handle */}
       <div
         className="flex justify-center pt-2.5 pb-2 cursor-pointer"
         onClick={() => setExpanded((e) => !e)}
@@ -54,9 +53,9 @@ export default function BottomSheet({ selectedTrail, onClear }: Props) {
           </div>
           <div className="flex items-center gap-2 mb-3">
             <span
-              className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[selectedTrail.difficulty]}`}
+              className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_CLASSES[selectedTrail.difficulty] ?? 'bg-gray-100 text-gray-600'}`}
             >
-              {DIFFICULTY_LABEL[selectedTrail.difficulty]}
+              {DIFFICULTY_LABEL[selectedTrail.difficulty] ?? selectedTrail.difficulty}
             </span>
             <span className="text-xs text-gray-500">
               {selectedTrail.distanceKm} km · {selectedTrail.estimatedMinutes} min
@@ -66,7 +65,7 @@ export default function BottomSheet({ selectedTrail, onClear }: Props) {
             onClick={() => navigate(`/trail/${selectedTrail.id}`)}
             className="w-full py-2.5 rounded-xl bg-primary text-white text-sm font-semibold"
           >
-            Ver detalles de la ruta
+            View trail details
           </button>
         </div>
       ) : (
@@ -74,14 +73,14 @@ export default function BottomSheet({ selectedTrail, onClear }: Props) {
           <div className="flex gap-5 mb-2">
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded-full" style={{ background: '#3B6D11' }} />
-              <span className="text-xs text-gray-600">Fácil / Carrito</span>
+              <span className="text-xs text-gray-600">Easy / Stroller</span>
             </div>
             <div className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded-full" style={{ background: '#854F0B' }} />
-              <span className="text-xs text-gray-600">Moderado</span>
+              <span className="text-xs text-gray-600">Moderate</span>
             </div>
           </div>
-          <p className="text-xs text-gray-400">Toca un marcador para ver los detalles</p>
+          <p className="text-xs text-gray-400">Tap a pin to see trail details</p>
         </div>
       )}
     </div>

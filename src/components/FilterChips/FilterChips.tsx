@@ -6,11 +6,11 @@ interface Props {
 }
 
 const filters: { id: FilterType; label: string }[] = [
-  { id: 'all', label: 'Todas' },
-  { id: 'easy', label: 'Fácil' },
-  { id: 'moderate', label: 'Moderado' },
-  { id: 'stroller', label: '🚼 Carrito' },
-  { id: 'dog', label: '🐕 Perros' },
+  { id: 'all', label: 'All' },
+  { id: 'easy', label: 'Easy' },
+  { id: 'moderate', label: 'Moderate' },
+  { id: 'stroller', label: '🚼 Stroller' },
+  { id: 'dog', label: '🐕 Dogs' },
 ]
 
 export default function FilterChips({ activeFilter, onFilterChange }: Props) {
