@@ -4,6 +4,7 @@ import { ArrowLeft, Share2, Clock, TrendingUp, Ruler, MapPin } from 'lucide-reac
 import { useAppStore } from '../store/useAppStore'
 import { initMiniMap } from '../utils/arcgis'
 import KidBadges from '../components/KidBadges/KidBadges'
+import NavBar from '../components/NavBar/NavBar'
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   easy: 'Easy',
@@ -143,10 +144,7 @@ export default function TrailDetail() {
       </div>
 
       {/* Sticky CTA */}
-      <div
-        className="shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100"
-        style={{ paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)' }}
-      >
+      <div className="shrink-0 px-4 py-3 bg-gray-50 border-t border-gray-100">
         <div className="bg-white rounded-2xl shadow-sm p-3 flex flex-col gap-2">
           <button
             onClick={requestLocationFocus}
@@ -162,6 +160,7 @@ export default function TrailDetail() {
           </button>
         </div>
       </div>
+      <NavBar />
     </div>
   )
 }
