@@ -46,6 +46,13 @@ export function initMap(
   return new MapView({ container, map, zoom: 11, center, ui: { components: [] } })
 }
 
+export function updateTrailLayer(view: __esri.MapView, trails: Trail[]) {
+  if (!view.map) return
+  const existing = view.map.findLayerById('trails')
+  if (existing) view.map.remove(existing)
+  view.map.add(buildTrailLayer(trails))
+}
+
 const USER_LAYER_ID = 'user-location'
 const ROUTE_LAYER_ID = 'route-indicator'
 

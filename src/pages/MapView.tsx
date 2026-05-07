@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react'
 import { useAppStore } from '../store/useAppStore'
 import {
   initMap,
+  updateTrailLayer,
   updateUserLocationOnMap,
   drawRouteIndicator,
   clearRouteIndicator,
@@ -54,6 +55,12 @@ export default function MapViewPage() {
       viewRef.current = null
     }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Refresh trail pins when data loads from Feature Layer
+  useEffect(() => {
+    if (!viewRef.current) return
+    viewRef.current.when(() => updateTrailLayer(viewRef.current!, trails))
+  }, [trails]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Update user location dot
   useEffect(() => {
