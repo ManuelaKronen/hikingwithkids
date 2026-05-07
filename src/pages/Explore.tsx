@@ -35,7 +35,7 @@ export default function Explore() {
       {/* Sticky header */}
       <div className="shrink-0 bg-[#7A5230] px-4 pt-3 pb-3 border-b border-[#5A3A1A]">
 
-        <p className="font-bold text-[#F8F0E3] text-lg mb-3 md:hidden">Hiking with Kids</p>
+        <p className="font-bold text-[#F8F0E3] text-lg mb-3 md:hidden uppercase tracking-wide">🥾 Hiking with Kids</p>
 
         {/* Search */}
         <div className="relative">
