@@ -143,7 +143,7 @@ export default function TrailDetail() {
           onClick={handleStart}
           className="w-full py-3.5 rounded-2xl bg-primary text-white font-semibold text-[15px]"
         >
-          🚀 Start trail
+          Directions to trailhead
         </button>
       </div>
     </div>
