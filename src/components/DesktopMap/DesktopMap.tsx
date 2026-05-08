@@ -16,6 +16,8 @@ export default function DesktopMap() {
   const navigate = useNavigate()
 
   const trails = useAppStore((s) => s.trails)
+  const trailsRef = useRef(trails)
+  trailsRef.current = trails
   const selectedTrail = useAppStore((s) => s.selectedTrail)
   const setSelectedTrail = useAppStore((s) => s.setSelectedTrail)
   const userLocation = useAppStore((s) => s.userLocation)
@@ -35,7 +37,7 @@ export default function DesktopMap() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hit = response.results.find((r: any) => r.type === 'graphic') as any
         if (hit?.graphic?.attributes?.trailId) {
-          const trail = trails.find((t: Trail) => t.id === hit.graphic.attributes.trailId)
+          const trail = trailsRef.current.find((t: Trail) => t.id === hit.graphic.attributes.trailId)
           if (trail) {
             setSelectedTrail(trail)
             navigate(`/trail/${trail.id}`)

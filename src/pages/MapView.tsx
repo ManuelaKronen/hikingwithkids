@@ -17,6 +17,8 @@ export default function MapViewPage() {
   const viewRef = useRef<__esri.MapView | null>(null)
   const navigate = useNavigate()
   const trails = useAppStore((s) => s.trails)
+  const trailsRef = useRef(trails)
+  trailsRef.current = trails
   const selectedTrail = useAppStore((s) => s.selectedTrail)
   const selectedTrailRef = useRef(selectedTrail)
   selectedTrailRef.current = selectedTrail
@@ -54,7 +56,7 @@ export default function MapViewPage() {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hit = response.results.find((r: any) => r.type === 'graphic') as any
         if (hit?.graphic?.attributes?.trailId) {
-          const trail = trails.find((t: Trail) => t.id === hit.graphic.attributes.trailId)
+          const trail = trailsRef.current.find((t: Trail) => t.id === hit.graphic.attributes.trailId)
           if (trail) {
             setSelectedTrail(trail)
             return
