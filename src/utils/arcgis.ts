@@ -9,6 +9,11 @@ import Polyline from '@arcgis/core/geometry/Polyline'
 import esriConfig from '@arcgis/core/config'
 import Home from '@arcgis/core/widgets/Home'
 import Zoom from '@arcgis/core/widgets/Zoom'
+import Expand from '@arcgis/core/widgets/Expand'
+import Search from '@arcgis/core/widgets/Search'
+import BasemapGallery from '@arcgis/core/widgets/BasemapGallery'
+import Legend from '@arcgis/core/widgets/Legend'
+import LayerList from '@arcgis/core/widgets/LayerList'
 import { Trail } from '../types/trail'
 
 const COLORS: Record<string, number[]> = {
@@ -71,6 +76,14 @@ export function initMap(
   view.when(() => {
     view.ui.add(new Home({ view }), 'top-left')
     view.ui.add(new Zoom({ view }), 'top-left')
+
+    const group = 'top-right'
+    view.ui.add([
+      new Expand({ view, content: new Search({ view }), expandIcon: 'search', group }),
+      new Expand({ view, content: new BasemapGallery({ view }), expandIcon: 'basemap', group }),
+      new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
+      new Expand({ view, content: new LayerList({ view }), expandIcon: 'layer-list', group }),
+    ], 'top-right')
   })
   return view
 }
