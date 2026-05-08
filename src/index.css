@@ -18,9 +18,15 @@
 .esri-widget--button,
 .esri-zoom,
 .esri-home,
+.esri-expand__button,
 .esri-expand__container,
 .esri-expand__content {
   border-radius: 4px !important;
+}
+
+.esri-expand__button {
+  border-radius: 4px !important;
+  overflow: hidden;
 }
 
 *,
