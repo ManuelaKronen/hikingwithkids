@@ -10,6 +10,7 @@ import Point from '@arcgis/core/geometry/Point'
 import Polyline from '@arcgis/core/geometry/Polyline'
 import esriConfig from '@arcgis/core/config'
 import Basemap from '@arcgis/core/Basemap'
+import BasemapStyle from '@arcgis/core/support/BasemapStyle'
 import Home from '@arcgis/core/widgets/Home'
 import Zoom from '@arcgis/core/widgets/Zoom'
 import Expand from '@arcgis/core/widgets/Expand'
@@ -98,15 +99,15 @@ export function initMap(
         content: new BasemapGallery({
           view,
           source: [
-            'arcgis/outdoor',
-            'arcgis/topographic',
-            'arcgis/streets',
-            'arcgis/light-gray',
-            'arcgis/dark-gray',
-            'arcgis/human-geography',
-            'arcgis/charted-territory',
-            'arcgis/midcentury',
-          ].map(Basemap.fromId).filter((b): b is Basemap => b != null),
+            ['arcgis/outdoor',           'Outdoor'],
+            ['arcgis/topographic',       'Topographic'],
+            ['arcgis/streets',           'Streets'],
+            ['arcgis/light-gray',        'Light Gray'],
+            ['arcgis/dark-gray',         'Dark Gray'],
+            ['arcgis/human-geography',   'Human Geography'],
+            ['arcgis/charted-territory', 'Charted Territory'],
+            ['arcgis/midcentury',        'Midcentury'],
+          ].map(([id, title]) => new Basemap({ style: new BasemapStyle({ id }), title })),
         }),
       }),
       new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
