@@ -110,7 +110,7 @@ export function initMap(
         }),
       }),
       new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
-      new Expand({ view, content: new LayerList({ view, visibilityAppearance: 'checkbox' }), expandIcon: 'layer-list', group }),
+      new Expand({ view, content: new LayerList({ view, visibilityAppearance: 'checkbox' }), expandIcon: 'layers', group }),
     ], 'top-right')
   })
 
