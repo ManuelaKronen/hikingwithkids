@@ -24,9 +24,12 @@
   border-radius: 4px !important;
 }
 
+.esri-ui {
+  --calcite-border-radius: 4px;
+}
+
 .esri-expand__button,
 .esri-expand .button {
-  --calcite-border-radius: 4px;
   border-radius: 4px !important;
   overflow: hidden;
 }
