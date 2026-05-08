@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Beige circle background -->
+  <circle cx="256" cy="256" r="256" fill="#F8F0E3"/>
+
+  <!-- Boot shaft -->
+  <rect x="172" y="108" width="118" height="192" rx="14" fill="#7A5230"/>
+
+  <!-- Tongue highlight -->
+  <rect x="196" y="118" width="70" height="155" rx="8" fill="#C4A882"/>
+
+  <!-- Boot ankle + toe box -->
+  <path d="M172 262 L172 308 Q172 326 194 330 L375 330 Q408 330 410 354 Q412 374 382 380 L152 380 Q124 380 122 354 L122 308 Q122 282 152 274 Z" fill="#7A5230"/>
+
+  <!-- Sole -->
+  <rect x="122" y="368" width="295" height="34" rx="17" fill="#5A3A1A"/>
+
+  <!-- Laces -->
+  <rect x="210" y="136" width="44" height="10" rx="5" fill="#F8F0E3"/>
+  <rect x="210" y="162" width="44" height="10" rx="5" fill="#F8F0E3"/>
+  <rect x="210" y="188" width="44" height="10" rx="5" fill="#F8F0E3"/>
+  <rect x="210" y="214" width="44" height="10" rx="5" fill="#F8F0E3"/>
+  <rect x="210" y="240" width="44" height="10" rx="5" fill="#F8F0E3"/>
+</svg>
