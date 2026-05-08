@@ -9,6 +9,7 @@ import UniqueValueRenderer from '@arcgis/core/renderers/UniqueValueRenderer'
 import Point from '@arcgis/core/geometry/Point'
 import Polyline from '@arcgis/core/geometry/Polyline'
 import esriConfig from '@arcgis/core/config'
+import Basemap from '@arcgis/core/Basemap'
 import Home from '@arcgis/core/widgets/Home'
 import Zoom from '@arcgis/core/widgets/Zoom'
 import Expand from '@arcgis/core/widgets/Expand'
@@ -104,7 +105,24 @@ export function initMap(
     const group = 'top-right'
     view.ui.add([
       new Expand({ view, content: new Search({ view }), expandIcon: 'search', group }),
-      new Expand({ view, content: new BasemapGallery({ view }), expandIcon: 'basemap', group }),
+      new Expand({
+        view,
+        expandIcon: 'basemap',
+        group,
+        content: new BasemapGallery({
+          view,
+          source: [
+            Basemap.fromId('arcgis/outdoor'),
+            Basemap.fromId('arcgis/topographic'),
+            Basemap.fromId('arcgis/streets'),
+            Basemap.fromId('arcgis/light-gray'),
+            Basemap.fromId('arcgis/dark-gray'),
+            Basemap.fromId('arcgis/human-geography'),
+            Basemap.fromId('arcgis/charted-territory'),
+            Basemap.fromId('arcgis/midcentury'),
+          ],
+        }),
+      }),
       new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
       new Expand({ view, content: new LayerList({ view, visibilityAppearance: 'checkbox' }), expandIcon: 'layer-list', group }),
     ], 'top-right')
