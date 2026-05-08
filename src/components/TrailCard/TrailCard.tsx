@@ -15,8 +15,8 @@ const DIFFICULTY_LABEL: Record<string, string> = {
 
 const DIFFICULTY_BG: Record<string, string> = {
   easy: 'bg-[#EFF7F3]',
-  moderate: 'bg-moderate',
-  hard: 'bg-hard',
+  moderate: 'bg-[#FDF7EE]',
+  hard: 'bg-[#FDEEED]',
 }
 
 export default function TrailCard({ trail, distanceFromUser }: Props) {
