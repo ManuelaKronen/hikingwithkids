@@ -10,6 +10,7 @@ import esriConfig from '@arcgis/core/config'
 import Home from '@arcgis/core/widgets/Home'
 import Zoom from '@arcgis/core/widgets/Zoom'
 import Expand from '@arcgis/core/widgets/Expand'
+import ScaleBar from '@arcgis/core/widgets/ScaleBar'
 import Search from '@arcgis/core/widgets/Search'
 import BasemapGallery from '@arcgis/core/widgets/BasemapGallery'
 import Legend from '@arcgis/core/widgets/Legend'
@@ -78,6 +79,8 @@ export function initMap(
     view.ui.add(new Zoom({ view }), 'top-left')
 
     const group = 'top-right'
+    view.ui.add(new ScaleBar({ view, unit: 'metric' }), 'bottom-left')
+
     view.ui.add([
       new Expand({ view, content: new Search({ view }), expandIcon: 'search', group }),
       new Expand({ view, content: new BasemapGallery({ view }), expandIcon: 'basemap', group }),
