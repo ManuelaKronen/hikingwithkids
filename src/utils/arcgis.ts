@@ -65,7 +65,7 @@ export function initMap(
   setupEsri()
   const trailLayer = buildTrailLayer(trails)
   const map = new Map({ basemap: 'arcgis/outdoor', layers: [trailLayer] })
-  return new MapView({ container, map, zoom: 11, center, ui: { components: [] } })
+  return new MapView({ container, map, zoom: 9, center, ui: { components: [] } })
 }
 
 export function updateTrailLayer(view: __esri.MapView, trails: Trail[]) {
