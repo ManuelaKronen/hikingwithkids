@@ -24,7 +24,8 @@
   border-radius: 4px !important;
 }
 
-.esri-expand__button {
+.esri-expand__button,
+.esri-expand .button {
   border-radius: 4px !important;
   overflow: hidden;
 }
