@@ -72,7 +72,7 @@ export function initMap(
   setupEsri()
   const trailLayer = buildTrailLayer(trails)
   const map = new Map({ basemap: 'arcgis/outdoor', layers: [trailLayer] })
-  const view = new MapView({ container, map, zoom: 8, center, ui: { components: [] } })
+  const view = new MapView({ container, map, zoom: 8, center, ui: { components: ['attribution'] } })
   view.when(() => {
     view.ui.add(new Home({ view }), 'top-left')
     view.ui.add(new Zoom({ view }), 'top-left')
