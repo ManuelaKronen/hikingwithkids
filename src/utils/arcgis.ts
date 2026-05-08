@@ -92,11 +92,8 @@ export function initMap(
     const group = 'top-right'
     view.ui.add([
       new Expand({ view, content: new Search({ view }), expandIcon: 'search', group }),
-      new Expand({
-        view,
-        expandIcon: 'basemap',
-        group,
-        content: new BasemapGallery({
+      (() => {
+        const gallery = new BasemapGallery({
           view,
           source: [
             ['arcgis/outdoor',           'Outdoor'],
@@ -107,8 +104,11 @@ export function initMap(
             ['arcgis/charted-territory', 'Charted Territory'],
             ['arcgis/midcentury',        'Midcentury'],
           ].map(([id, title]) => new Basemap({ style: new BasemapStyle({ id }), title })),
-        }),
-      }),
+        })
+        const expand = new Expand({ view, expandIcon: 'basemap', group, content: gallery })
+        gallery.watch('activeBasemap', () => expand.collapse())
+        return expand
+      })(),
       new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
       new Expand({ view, content: new LayerList({ view, visibilityAppearance: 'checkbox' }), expandIcon: 'layers', group }),
     ], 'top-right')
