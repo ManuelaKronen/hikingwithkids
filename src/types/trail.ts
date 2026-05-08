@@ -19,6 +19,7 @@ export interface Trail {
   difficulty: Difficulty
   kidFeatures: KidFeature
   photos: string[]
+  description: string
   geometry: {
     type: 'LineString'
     coordinates: [number, number][]

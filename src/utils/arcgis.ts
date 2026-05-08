@@ -50,22 +50,7 @@ function buildFeatureLayer(url: string): FeatureLayer {
   })
 }
 
-// GraphicsLayer with polylines — fallback when no FeatureLayer URL (mock data mode)
-function buildRouteLayer(trails: Trail[]): GraphicsLayer {
-  const layer = new GraphicsLayer({ id: 'trail-routes' })
-  trails.forEach((trail) => {
-    if (trail.geometry.coordinates.length < 2) return
-    const color = COLORS[trail.difficulty] ?? COLORS.easy
-    layer.add(new Graphic({
-      geometry: new Polyline({ paths: [trail.geometry.coordinates], spatialReference: { wkid: 4326 } }),
-      symbol: new SimpleLineSymbol({ color, width: 3 }),
-      attributes: { trailId: trail.id },
-    }))
-  })
-  return layer
-}
-
-// GraphicsLayer with trailhead dots — always present, used for click targets
+// GraphicsLayer with trailhead dots — used for click targets
 function buildDotLayer(trails: Trail[]): GraphicsLayer {
   const layer = new GraphicsLayer({ id: 'trail-dots', listMode: 'hide' })
   trails.forEach((trail) => {
@@ -91,10 +76,11 @@ export function initMap(
   setupEsri()
 
   const featureLayerUrl = import.meta.env.VITE_ESRI_FEATURE_LAYER_URL
-  const routeLayer = featureLayerUrl ? buildFeatureLayer(featureLayerUrl) : buildRouteLayer(trails)
-  const dotLayer = buildDotLayer(trails)
+  const layers = featureLayerUrl
+    ? [buildFeatureLayer(featureLayerUrl), buildDotLayer(trails)]
+    : [buildDotLayer(trails)]
 
-  const map = new Map({ basemap: 'arcgis/outdoor', layers: [routeLayer, dotLayer] })
+  const map = new Map({ basemap: 'arcgis/outdoor', layers })
   const view = new MapView({ container, map, zoom: 8, center, ui: { components: ['attribution'] } })
 
   view.when(() => {
@@ -133,18 +119,9 @@ export function initMap(
 
 export function updateTrailLayer(view: __esri.MapView, trails: Trail[]) {
   if (!view.map) return
-
-  // Update trailhead dots
   const dots = view.map.findLayerById('trail-dots')
   if (dots) view.map.remove(dots)
   view.map.add(buildDotLayer(trails))
-
-  // Only update route graphics in mock data mode (FeatureLayer manages itself)
-  if (!import.meta.env.VITE_ESRI_FEATURE_LAYER_URL) {
-    const routes = view.map.findLayerById('trail-routes')
-    if (routes) view.map.remove(routes)
-    view.map.add(buildRouteLayer(trails))
-  }
 }
 
 const USER_LAYER_ID = 'user-location'

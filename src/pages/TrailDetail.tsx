@@ -113,7 +113,10 @@ export default function TrailDetail() {
           {/* Description */}
           <section className="mb-5">
             <h3 className="text-sm font-semibold text-gray-700 mb-2">Description</h3>
-            <p className="text-sm text-gray-400 italic">Description coming soon</p>
+            {trail.description
+              ? <p className="text-sm text-gray-600 leading-relaxed">{trail.description}</p>
+              : <p className="text-sm text-gray-400 italic">Description coming soon</p>
+            }
           </section>
 
         </div>

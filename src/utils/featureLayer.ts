@@ -31,6 +31,7 @@ function featureToTrail(feature: __esri.Graphic): Trail {
       minRecommendedAge: a.min_age != null ? Number(a.min_age) : undefined,
     },
     photos: a.photos ? String(a.photos).split(',').filter(Boolean) : [],
+    description: a.description ?? '',
     geometry: {
       type: 'LineString',
       coordinates: geom?.paths?.[0]?.map((p) => [p[0], p[1]] as [number, number]) ?? [],

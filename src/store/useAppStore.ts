@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { Trail, UserProfile, Difficulty } from '../types/trail'
-import { mockTrails } from '../data/mockTrails'
 
 export type FilterType = 'easy' | 'moderate' | 'hard' | 'stroller' | 'playground' | 'water' | 'picnic'
 
@@ -20,8 +19,6 @@ const defaultProfile: UserProfile = {
   savedTrailIds: [],
   completedTrailIds: [],
 }
-
-const initialTrails = import.meta.env.VITE_ESRI_FEATURE_LAYER_URL ? [] : mockTrails
 
 const DIFFICULTY_SET = new Set<FilterType>(['easy', 'moderate', 'hard'])
 
@@ -73,8 +70,8 @@ interface AppState {
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      trails: initialTrails,
-      filteredTrails: initialTrails,
+      trails: [],
+      filteredTrails: [],
       activeFilters: [],
       locationFocusCount: 0,
       userProfile: defaultProfile,
