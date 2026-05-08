@@ -26,12 +26,17 @@
 
 .esri-ui {
   --calcite-border-radius: 4px;
+  --calcite-corner-radius-sharp: 4px;
 }
 
 .esri-expand__button,
 .esri-expand .button {
   border-radius: 4px !important;
   overflow: hidden;
+}
+
+.esri-expand .button::part(button) {
+  border-radius: 4px !important;
 }
 
 *,
