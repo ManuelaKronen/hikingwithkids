@@ -19,6 +19,12 @@ const DIFFICULTY_BG: Record<string, string> = {
   hard: 'bg-[#FDEEED]',
 }
 
+const DIFFICULTY_BADGE: Record<string, string> = {
+  easy: 'bg-kid text-kid-text',
+  moderate: 'bg-[#F5E8CC] text-moderate-text',
+  hard: 'bg-[#F5D9D7] text-hard-text',
+}
+
 export default function TrailCard({ trail, distanceFromUser }: Props) {
   const navigate = useNavigate()
 
@@ -49,26 +55,17 @@ export default function TrailCard({ trail, distanceFromUser }: Props) {
           </p>
         )}
         <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-          <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">
-            {DIFFICULTY_LABEL[trail.difficulty] ?? trail.difficulty}
-          </span>
-          {trail.kidFeatures.minRecommendedAge && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">
-              👶 {trail.kidFeatures.minRecommendedAge}+
-            </span>
-          )}
-          {trail.kidFeatures.strollerFriendly && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🚼 Stroller</span>
-          )}
-          {trail.kidFeatures.playground && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🛝 Playground</span>
-          )}
-          {trail.kidFeatures.waterFountain && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">💧 Water</span>
-          )}
-          {trail.kidFeatures.picnicArea && (
-            <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-kid text-kid-text">🧺 Picnic</span>
-          )}
+          {(() => {
+            const badge = `text-[11px] font-medium px-2 py-0.5 rounded-full ${DIFFICULTY_BADGE[trail.difficulty] ?? 'bg-kid text-kid-text'}`
+            return <>
+              <span className={badge}>{DIFFICULTY_LABEL[trail.difficulty] ?? trail.difficulty}</span>
+              {trail.kidFeatures.minRecommendedAge && <span className={badge}>👶 {trail.kidFeatures.minRecommendedAge}+</span>}
+              {trail.kidFeatures.strollerFriendly && <span className={badge}>🚼 Stroller</span>}
+              {trail.kidFeatures.playground && <span className={badge}>🛝 Playground</span>}
+              {trail.kidFeatures.waterFountain && <span className={badge}>💧 Water</span>}
+              {trail.kidFeatures.picnicArea && <span className={badge}>🧺 Picnic</span>}
+            </>
+          })()}
         </div>
       </div>
     </div>
