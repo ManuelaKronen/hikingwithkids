@@ -110,6 +110,12 @@ export default function TrailDetail() {
             <KidBadges features={trail.kidFeatures} size="md" />
           </section>
 
+          {/* Description */}
+          <section className="mb-5">
+            <h3 className="text-sm font-semibold text-gray-700 mb-2">Description</h3>
+            <p className="text-sm text-gray-400 italic">Description coming soon</p>
+          </section>
+
         </div>
       </div>
 
