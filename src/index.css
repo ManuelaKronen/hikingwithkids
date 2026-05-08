@@ -15,6 +15,12 @@
   --color-surface: #FFFFFF;
 }
 
+.esri-widget--button,
+.esri-zoom,
+.esri-home {
+  border-radius: 4px !important;
+}
+
 *,
 *::before,
 *::after {

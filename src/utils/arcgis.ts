@@ -7,6 +7,8 @@ import SimpleLineSymbol from '@arcgis/core/symbols/SimpleLineSymbol'
 import Point from '@arcgis/core/geometry/Point'
 import Polyline from '@arcgis/core/geometry/Polyline'
 import esriConfig from '@arcgis/core/config'
+import Home from '@arcgis/core/widgets/Home'
+import Zoom from '@arcgis/core/widgets/Zoom'
 import { Trail } from '../types/trail'
 
 const COLORS: Record<string, number[]> = {
@@ -65,7 +67,12 @@ export function initMap(
   setupEsri()
   const trailLayer = buildTrailLayer(trails)
   const map = new Map({ basemap: 'arcgis/outdoor', layers: [trailLayer] })
-  return new MapView({ container, map, zoom: 8, center, ui: { components: [] } })
+  const view = new MapView({ container, map, zoom: 8, center, ui: { components: [] } })
+  view.when(() => {
+    view.ui.add(new Home({ view }), 'top-left')
+    view.ui.add(new Zoom({ view }), 'top-left')
+  })
+  return view
 }
 
 export function updateTrailLayer(view: __esri.MapView, trails: Trail[]) {
