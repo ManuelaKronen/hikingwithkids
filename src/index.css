@@ -35,8 +35,7 @@
   overflow: hidden;
 }
 
-.esri-expand .button::part(button),
-.esri-expand calcite-action::part(button) {
+calcite-action::part(button) {
   border-radius: 4px !important;
 }
 
