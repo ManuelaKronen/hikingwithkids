@@ -41,7 +41,7 @@ function DesktopTopNav() {
       </div>
       {onDetailPage && (
         <button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate('/')}
           className="flex items-center gap-1 text-sm text-[#C4A882] hover:text-[#F8F0E3] transition-colors"
         >
           <ArrowLeft size={15} strokeWidth={2} />
