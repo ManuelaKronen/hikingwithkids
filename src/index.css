@@ -17,7 +17,9 @@
 
 .esri-widget--button,
 .esri-zoom,
-.esri-home {
+.esri-home,
+.esri-expand__container,
+.esri-expand__content {
   border-radius: 4px !important;
 }
 
