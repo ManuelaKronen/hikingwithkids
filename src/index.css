@@ -17,22 +17,13 @@
 
 .esri-widget--button,
 .esri-zoom,
-.esri-home,
-.esri-expand__button,
-.esri-expand__container,
-.esri-expand__content {
+.esri-home {
   border-radius: 4px !important;
 }
 
 .esri-ui {
   --calcite-border-radius: 4px;
   --calcite-corner-radius-sharp: 4px;
-}
-
-.esri-expand__button,
-.esri-expand .button {
-  border-radius: 4px !important;
-  overflow: hidden;
 }
 
 calcite-action::part(button) {
