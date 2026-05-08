@@ -106,7 +106,7 @@ export function initMap(
       new Expand({ view, content: new Search({ view }), expandIcon: 'search', group }),
       new Expand({ view, content: new BasemapGallery({ view }), expandIcon: 'basemap', group }),
       new Expand({ view, content: new Legend({ view }), expandIcon: 'legend', group }),
-      new Expand({ view, content: new LayerList({ view }), expandIcon: 'layer-list', group }),
+      new Expand({ view, content: new LayerList({ view, visibilityAppearance: 'checkbox' }), expandIcon: 'layer-list', group }),
     ], 'top-right')
   })
 
