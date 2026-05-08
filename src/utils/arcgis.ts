@@ -45,7 +45,6 @@ function buildFeatureLayer(url: string): FeatureLayer {
         { value: 'moderate', label: 'Moderate', symbol: new SimpleLineSymbol({ color: COLORS.moderate, width: 3 }) },
         { value: 'hard',     label: 'Hard',     symbol: new SimpleLineSymbol({ color: COLORS.hard,     width: 3 }) },
       ],
-      defaultSymbol: new SimpleLineSymbol({ color: COLORS.easy, width: 3 }),
     }),
   })
 }
