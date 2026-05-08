@@ -104,7 +104,6 @@ export function initMap(
             ['arcgis/streets',           'Streets'],
             ['arcgis/light-gray',        'Light Gray'],
             ['arcgis/dark-gray',         'Dark Gray'],
-            ['arcgis/human-geography',   'Human Geography'],
             ['arcgis/charted-territory', 'Charted Territory'],
             ['arcgis/midcentury',        'Midcentury'],
           ].map(([id, title]) => new Basemap({ style: new BasemapStyle({ id }), title })),
