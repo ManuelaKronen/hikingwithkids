@@ -9,6 +9,7 @@ import UniqueValueRenderer from '@arcgis/core/renderers/UniqueValueRenderer'
 import Point from '@arcgis/core/geometry/Point'
 import Polyline from '@arcgis/core/geometry/Polyline'
 import esriConfig from '@arcgis/core/config'
+import { setLocale } from '@arcgis/core/intl'
 import Basemap from '@arcgis/core/Basemap'
 import BasemapStyle from '@arcgis/core/support/BasemapStyle'
 import Home from '@arcgis/core/widgets/Home'
@@ -30,6 +31,7 @@ const COLORS: Record<string, number[]> = {
 function setupEsri() {
   const key = import.meta.env.VITE_ARCGIS_API_KEY
   if (key) esriConfig.apiKey = key
+  setLocale('en')
 }
 
 // FeatureLayer with UniqueValueRenderer — feeds Legend and LayerList
