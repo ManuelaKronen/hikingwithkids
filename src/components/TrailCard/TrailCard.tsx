@@ -13,12 +13,18 @@ const DIFFICULTY_LABEL: Record<string, string> = {
   hard: 'Hard',
 }
 
+const DIFFICULTY_BG: Record<string, string> = {
+  easy: 'bg-[#EFF7F3]',
+  moderate: 'bg-moderate',
+  hard: 'bg-hard',
+}
+
 export default function TrailCard({ trail, distanceFromUser }: Props) {
   const navigate = useNavigate()
 
   return (
     <div
-      className="flex items-stretch bg-[#EFF7F3] rounded-2xl shadow-sm overflow-hidden active:opacity-80 cursor-pointer"
+      className={`flex items-stretch ${DIFFICULTY_BG[trail.difficulty] ?? 'bg-[#EFF7F3]'} rounded-2xl shadow-sm overflow-hidden active:opacity-80 cursor-pointer`}
       onClick={() => navigate(`/trail/${trail.id}`)}
     >
       {/* Photo thumbnail */}
