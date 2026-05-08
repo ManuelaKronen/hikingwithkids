@@ -66,7 +66,7 @@ function buildRouteLayer(trails: Trail[]): GraphicsLayer {
 
 // GraphicsLayer with trailhead dots — always present, used for click targets
 function buildDotLayer(trails: Trail[]): GraphicsLayer {
-  const layer = new GraphicsLayer({ id: 'trail-dots' })
+  const layer = new GraphicsLayer({ id: 'trail-dots', listMode: 'hide' })
   trails.forEach((trail) => {
     const color = COLORS[trail.difficulty] ?? COLORS.easy
     layer.add(new Graphic({
@@ -135,7 +135,7 @@ export function updateUserLocationOnMap(view: __esri.MapView, lat: number, lng: 
   if (!view.map) return
   let layer = view.map.findLayerById(USER_LAYER_ID) as GraphicsLayer | undefined
   if (!layer) {
-    layer = new GraphicsLayer({ id: USER_LAYER_ID })
+    layer = new GraphicsLayer({ id: USER_LAYER_ID, listMode: 'hide' })
     view.map.add(layer)
   }
   layer.removeAll()
