@@ -33,7 +33,7 @@ A mobile-first web app for finding family-friendly hiking trails. Browse trails 
 - Trailhead dot markers — clickable to select a trail and open its detail view
 - User location shown as a blue dot, updated in real time
 - **Top-left**: Home, Zoom in/out (square buttons)
-- **Top-right**: Search address, Basemap gallery (8 curated basemaps), Legend, Layer list (with checkbox visibility)
+- **Top-right**: Search address, Basemap gallery (7 curated basemaps), Legend, Layer list (with checkbox visibility)
 - **Bottom-left**: Metric scale bar
 - **Bottom**: Esri attribution
 
